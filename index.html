@@ -94,10 +94,10 @@
       </div>
     </section>
 
-    <!-- 카테고리 버튼 (7개) & ‘거래 가능만 보기’ 켜고 끄는 버튼 -->
+    <!-- 카테고리 버튼 (8개) & ‘거래 가능만 보기’ 켜고 끄는 버튼 -->
     <section class="filter-section" aria-label="상품 필터 및 카테고리 선택">
       <div class="filter-top-bar">
-        <!-- 카테고리 버튼: 전체, 디지털기기, 가구/인테리어, 의류, 생활가전, 도서/티켓, 기타 -->
+        <!-- 카테고리 버튼: 전체, 디지털기기, 가구/인테리어, 의류, 생활가전, 도서/티켓, 반려동물 용품, 기타 -->
         <div class="category-list" id="categoryList" role="tablist" aria-label="상품 카테고리">
           <button type="button" class="category-btn active" data-category="전체" role="tab" aria-selected="true">
             전체
@@ -116,6 +116,9 @@
           </button>
           <button type="button" class="category-btn" data-category="도서/티켓" role="tab" aria-selected="false">
             도서/티켓
+          </button>
+          <button type="button" class="category-btn" data-category="반려동물 용품" role="tab" aria-selected="false">
+            반려동물 용품
           </button>
           <button type="button" class="category-btn" data-category="기타" role="tab" aria-selected="false">
             기타
@@ -242,6 +245,9 @@
                 <button type="button" class="preset-chip" data-preset="book" aria-pressed="false">
                   <span>📚</span><span>도서/티켓</span>
                 </button>
+                <button type="button" class="preset-chip" data-preset="pet" aria-pressed="false">
+                  <span>🐾</span><span>반려동물 용품</span>
+                </button>
                 <button type="button" class="preset-chip" data-preset="potato" aria-pressed="false">
                   <span>🧺</span><span>기타/보물</span>
                 </button>
@@ -290,6 +296,7 @@
                 <option value="의류">의류</option>
                 <option value="생활가전">생활가전</option>
                 <option value="도서/티켓">도서/티켓</option>
+                <option value="반려동물 용품">반려동물 용품</option>
                 <option value="기타">기타</option>
               </select>
               <span class="select-arrow" aria-hidden="true">▾</span>

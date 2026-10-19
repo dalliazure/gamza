@@ -213,6 +213,7 @@
     fashion: { emoji: '🧥', subText: '포근한 의류', bgStart: '#F9F4EE', bgEnd: '#E4D8CA', accent: '#A97C50' },
     appliance: { emoji: '☕', subText: '생활가전', bgStart: '#FAF3E8', bgEnd: '#E8D6C0', accent: '#D4A373' },
     book: { emoji: '📚', subText: '도서/티켓', bgStart: '#F5EFE6', bgEnd: '#DFD0BC', accent: '#8B5E3C' },
+    pet: { emoji: '🐾', subText: '반려동물 용품', bgStart: '#FDF6EC', bgEnd: '#ECD9C4', accent: '#C48B5C' },
     potato: { emoji: '🧺', subText: '감자네 보물', bgStart: '#F7EFE6', bgEnd: '#EEDCC8', accent: '#8B5E3C' }
   };
 
@@ -222,6 +223,7 @@
     '의류': 'fashion',
     '생활가전': 'appliance',
     '도서/티켓': 'book',
+    '반려동물 용품': 'pet',
     '기타': 'potato'
   };
 
