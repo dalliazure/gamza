@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>감자 (Gamza) - 포근한 우리 동네 중고장터</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body id="top">
+  <!-- ========================================================================
+       공통 상단 헤더: 브랜드 로고, 검색창, [글쓰기] 버튼, [로그인] 버튼
+       ======================================================================== -->
+  <header class="gamza-header" role="banner">
+    <div class="header-inner container">
+      <!-- 1. 브랜드 로고 (클릭 시 전체 목록 및 필터 초기화) -->
+      <a href="#top" id="logoBtn" class="brand-logo" aria-label="감자 홈으로 이동 및 전체 목록 보기">
+        <span class="logo-icon" aria-hidden="true">🥔</span>
+        <div class="logo-text-group">
+          <span class="logo-title">감자</span>
+          <span class="logo-subtitle">포근한 우리 동네 중고장터</span>
+        </div>
+      </a>
+
+      <!-- 2. 상단 검색 창 -->
+      <div class="search-wrapper" id="headerSearchWrapper" role="search">
+        <label for="searchInput" class="sr-only">상품명, 판매 위치, 카테고리 검색</label>
+        <span class="search-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </span>
+        <input
+          type="search"
+          id="searchInput"
+          class="search-input"
+          placeholder="상품명, 동네 이름, 카테고리로 검색해보세요 (예: 맥북, 역삼동)"
+          autocomplete="off"
+        />
+        <button
+          type="button"
+          id="clearSearchBtn"
+          class="clear-search-btn"
+          aria-label="검색어 지우기"
+          hidden
+        >
+          ✕
+        </button>
+      </div>
+
+      <!-- 3. 우측 액션 버튼: [글쓰기], 로그인 전([로그인]) / 로그인 후([닉네임], [로그아웃]) -->
+      <div class="header-actions">
+        <button type="button" id="openWriteBtn" class="btn btn-primary">
+          <span class="btn-icon" aria-hidden="true">＋</span>
+          <span>글쓰기</span>
+        </button>
+
+        <!-- 로그인 전: [로그인] 버튼만 표시 -->
+        <button type="button" id="loginBtn" class="btn btn-outline">
+          <span>로그인</span>
+        </button>
+
+        <!-- 로그인 후: [닉네임]과 [로그아웃] 버튼만 표시 -->
+        <button
+          type="button"
+          id="userNicknameBtn"
+          class="btn btn-user-nickname"
+          aria-label="로그인된 이웃 닉네임"
+          hidden
+        >
+          <span aria-hidden="true">🥔</span>
+          <span id="userNicknameText">포슬감자</span>
+        </button>
+        <button type="button" id="logoutBtn" class="btn btn-outline btn-logout" hidden>
+          <span>로그아웃</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       [화면 1] 상품 목록 화면 (#listScreen)
+       ======================================================================== -->
+  <main id="listScreen" class="list-main container">
+    <!-- 감자 장터 소개 배너 -->
+    <section class="hero-banner" aria-label="감자 장터 소개">
+      <div class="hero-content">
+        <span class="hero-badge">🌾 갓 수확한 이웃들의 따뜻한 직거래</span>
+        <h1 class="hero-title">포근한 우리 동네 중고 거래, <strong>감자</strong></h1>
+        <p class="hero-desc">가까운 이웃과 믿을 수 있는 중고 물품을 쉽고 따뜻하게 나누어 보세요.</p>
+      </div>
+      <div class="hero-illust" aria-hidden="true">
+        <div class="potato-mascot">🥔</div>
+      </div>
+    </section>
+
+    <!-- 카테고리 버튼 (7개) & ‘거래 가능만 보기’ 켜고 끄는 버튼 -->
+    <section class="filter-section" aria-label="상품 필터 및 카테고리 선택">
+      <div class="filter-top-bar">
+        <!-- 카테고리 버튼: 전체, 디지털기기, 가구/인테리어, 의류, 생활가전, 도서/티켓, 기타 -->
+        <div class="category-list" id="categoryList" role="tablist" aria-label="상품 카테고리">
+          <button type="button" class="category-btn active" data-category="전체" role="tab" aria-selected="true">
+            전체
+          </button>
+          <button type="button" class="category-btn" data-category="디지털기기" role="tab" aria-selected="false">
+            디지털기기
+          </button>
+          <button type="button" class="category-btn" data-category="가구/인테리어" role="tab" aria-selected="false">
+            가구/인테리어
+          </button>
+          <button type="button" class="category-btn" data-category="의류" role="tab" aria-selected="false">
+            의류
+          </button>
+          <button type="button" class="category-btn" data-category="생활가전" role="tab" aria-selected="false">
+            생활가전
+          </button>
+          <button type="button" class="category-btn" data-category="도서/티켓" role="tab" aria-selected="false">
+            도서/티켓
+          </button>
+          <button type="button" class="category-btn" data-category="기타" role="tab" aria-selected="false">
+            기타
+          </button>
+        </div>
+
+        <!-- ‘거래 가능만 보기’ 켜고 끄는 버튼 -->
+        <div class="filter-toggle-wrap">
+          <button
+            type="button"
+            id="availableOnlyBtn"
+            class="available-toggle-btn"
+            aria-pressed="false"
+          >
+            <span class="toggle-track" aria-hidden="true">
+              <span class="toggle-thumb"></span>
+            </span>
+            <span class="toggle-label">거래 가능만 보기</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 현재 필터/상품 개수 표시 바 -->
+      <div class="filter-meta-bar">
+        <p class="result-count-text">
+          조회된 상품 <strong id="productCount">6</strong>개
+          <span id="activeFilterSummary" class="active-filter-summary"></span>
+        </p>
+      </div>
+    </section>
+
+    <!-- 상품 카드 목록 그리드 (초기 6개) -->
+    <section class="product-list-section" aria-label="상품 목록">
+      <div id="productGrid" class="product-grid" role="list">
+        <!-- app.js에서 6개의 상품 카드가 렌더링됩니다 -->
+      </div>
+
+      <!-- 검색/필터 결과가 없을 때 보여줄 빈 상태 UI -->
+      <div id="emptyState" class="empty-state" hidden>
+        <div class="empty-icon" aria-hidden="true">🥔💦</div>
+        <h2 class="empty-title">조건에 맞는 감자 상품이 없어요</h2>
+        <p class="empty-desc">검색어를 바꾸거나 다른 카테고리·필터를 선택해 보세요.</p>
+        <button type="button" id="resetFilterBtn" class="btn btn-secondary">
+          필터 초기화
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       [화면 3] 글쓰기 화면 (#writeScreen)
+       입력 칸: 상품 이미지, 상품명, 카테고리, 가격, 자세한 설명, 거래 동네, 판매 상태
+       맨 아래: [작성 완료] 버튼
+       ======================================================================== -->
+  <section id="writeScreen" class="write-screen container" aria-labelledby="writeScreenTitle" hidden>
+    <div class="write-container">
+      <div class="write-header">
+        <button type="button" id="cancelWriteBtn" class="btn btn-outline btn-back-list" aria-label="목록으로 돌아가기">
+          <span aria-hidden="true">←</span>
+          <span>상품 목록으로 돌아가기</span>
+        </button>
+        <div class="write-header-card">
+          <span class="hero-badge">🥔 내 물건 등록하기</span>
+          <h2 id="writeScreenTitle" class="write-title">내 물건 팔기</h2>
+          <p class="write-subtitle">이웃과 거래할 물건 정보를 입력해 주세요. 작성한 글은 데이터베이스에 실시간으로 저장되어 새로고침해도 유지됩니다.</p>
+        </div>
+      </div>
+
+      <form id="writeForm" class="write-form" novalidate>
+        <!-- 유효성 검사 안내 배너 -->
+        <div id="writeErrorBanner" class="write-error-banner" role="alert" hidden>
+          <span aria-hidden="true">⚠️</span>
+          <span id="writeErrorMessage">필수 입력 항목을 모두 확인해 주세요.</span>
+        </div>
+
+        <!-- 1. 상품 이미지 -->
+        <div class="form-group">
+          <div class="form-label-row">
+            <label for="writeImageInput" class="form-label">
+              상품 이미지 <span class="required-dot" title="필수">*</span>
+            </label>
+            <span class="form-helper">직접 사진을 올리거나 감자 일러스트 프리셋을 선택할 수 있어요</span>
+          </div>
+
+          <div class="image-upload-layout">
+            <div id="imageDropZone" class="image-preview-box" tabindex="0" role="button" aria-label="상품 이미지 파일 선택">
+              <img id="writeImagePreview" class="image-preview-img" src="" alt="상품 이미지 미리보기" />
+              <div class="image-overlay-hint">
+                <span class="camera-icon" aria-hidden="true">📷</span>
+                <strong>사진 업로드 / 변경</strong>
+                <span>클릭 또는 이미지 드래그</span>
+              </div>
+              <button type="button" id="removeImageBtn" class="btn-remove-image" hidden>
+                ✕ 기본 일러스트로 변경
+              </button>
+            </div>
+
+            <input
+              type="file"
+              id="writeImageInput"
+              name="writeImage"
+              accept="image/*"
+              class="sr-only"
+            />
+
+            <div class="preset-selector-panel">
+              <div class="preset-panel-header">
+                <strong class="preset-title">🎨 감자 일러스트 프리셋</strong>
+                <span class="preset-desc">사진 파일이 없어도 어울리는 일러스트로 바로 등록해보세요!</span>
+              </div>
+              <div id="writePresetList" class="preset-grid" role="radiogroup" aria-label="상품 기본 이미지 프리셋">
+                <button type="button" class="preset-chip active" data-preset="digital" aria-pressed="true">
+                  <span>💻</span><span>디지털기기</span>
+                </button>
+                <button type="button" class="preset-chip" data-preset="furniture" aria-pressed="false">
+                  <span>🪑</span><span>가구/인테리어</span>
+                </button>
+                <button type="button" class="preset-chip" data-preset="fashion" aria-pressed="false">
+                  <span>🧥</span><span>의류</span>
+                </button>
+                <button type="button" class="preset-chip" data-preset="appliance" aria-pressed="false">
+                  <span>☕</span><span>생활가전</span>
+                </button>
+                <button type="button" class="preset-chip" data-preset="book" aria-pressed="false">
+                  <span>📚</span><span>도서/티켓</span>
+                </button>
+                <button type="button" class="preset-chip" data-preset="potato" aria-pressed="false">
+                  <span>🧺</span><span>기타/보물</span>
+                </button>
+              </div>
+              <button type="button" id="triggerFileSelectBtn" class="btn btn-outline btn-full">
+                📁 내 컴퓨터/스마트폰에서 사진 선택하기
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. 상품명 -->
+        <div class="form-group">
+          <div class="form-label-row">
+            <label for="writeTitle" class="form-label">
+              상품명 <span class="required-dot" title="필수">*</span>
+            </label>
+            <span id="writeTitleCount" class="form-helper">0 / 40자</span>
+          </div>
+          <input
+            type="text"
+            id="writeTitle"
+            name="writeTitle"
+            class="form-input"
+            placeholder="상품명을 입력해 주세요 (예: 아이패드 에어 5세대 풀박스)"
+            maxlength="40"
+            required
+            autocomplete="off"
+          />
+          <p class="field-error" id="writeTitleError" hidden>상품명을 2글자 이상 입력해 주세요.</p>
+        </div>
+
+        <!-- 3. 카테고리 & 4. 가격 -->
+        <div class="form-row-grid">
+          <!-- 3. 카테고리 -->
+          <div class="form-group">
+            <div class="form-label-row">
+              <label for="writeCategory" class="form-label">
+                카테고리 <span class="required-dot" title="필수">*</span>
+              </label>
+            </div>
+            <div class="select-wrapper">
+              <select id="writeCategory" name="writeCategory" class="form-select" required>
+                <option value="디지털기기" selected>디지털기기</option>
+                <option value="가구/인테리어">가구/인테리어</option>
+                <option value="의류">의류</option>
+                <option value="생활가전">생활가전</option>
+                <option value="도서/티켓">도서/티켓</option>
+                <option value="기타">기타</option>
+              </select>
+              <span class="select-arrow" aria-hidden="true">▾</span>
+            </div>
+            <p class="field-error" id="writeCategoryError" hidden>카테고리를 선택해 주세요.</p>
+          </div>
+
+          <!-- 4. 가격 -->
+          <div class="form-group">
+            <div class="form-label-row">
+              <label for="writePrice" class="form-label">
+                가격 <span class="required-dot" title="필수">*</span>
+              </label>
+              <span id="writePriceFormatted" class="price-preview-text">0원</span>
+            </div>
+            <div class="price-input-wrapper">
+              <span class="currency-prefix" aria-hidden="true">₩</span>
+              <input
+                type="number"
+                id="writePrice"
+                name="writePrice"
+                class="form-input price-input"
+                placeholder="가격을 숫자로 입력 (예: 35000)"
+                min="0"
+                max="999999999"
+                step="100"
+                required
+              />
+              <span class="currency-suffix" aria-hidden="true">원</span>
+            </div>
+            <p class="field-error" id="writePriceError" hidden>0원 이상의 가격을 숫자로 입력해 주세요.</p>
+          </div>
+        </div>
+
+        <!-- 5. 자세한 설명 -->
+        <div class="form-group">
+          <div class="form-label-row">
+            <label for="writeDescription" class="form-label">
+              자세한 설명 <span class="required-dot" title="필수">*</span>
+            </label>
+            <span id="writeDescCount" class="form-helper">0 / 500자</span>
+          </div>
+          <textarea
+            id="writeDescription"
+            name="writeDescription"
+            class="form-textarea"
+            rows="5"
+            maxlength="500"
+            placeholder="구매 시기, 사용감, 하자 여부, 선호하는 거래 방법 등 자세한 설명을 작성해 주세요."
+            required
+          ></textarea>
+          <p class="field-error" id="writeDescriptionError" hidden>자세한 설명을 5글자 이상 입력해 주세요.</p>
+        </div>
+
+        <!-- 6. 거래 동네 & 7. 판매 상태 -->
+        <div class="form-row-grid">
+          <!-- 6. 거래 동네 -->
+          <div class="form-group">
+            <div class="form-label-row">
+              <label for="writeLocation" class="form-label">
+                거래 동네 <span class="required-dot" title="필수">*</span>
+              </label>
+              <span class="form-helper">직거래 희망 위치</span>
+            </div>
+            <input
+              type="text"
+              id="writeLocation"
+              name="writeLocation"
+              class="form-input"
+              placeholder="예: 서울 강남구 역삼동, 감자1동"
+              value="서울 강남구 역삼동"
+              maxlength="30"
+              required
+            />
+            <div class="quick-location-chips" aria-label="동네 빠른 입력">
+              <button type="button" class="location-chip" data-location="서울 강남구 역삼동">📍 강남구 역삼동</button>
+              <button type="button" class="location-chip" data-location="서울 마포구 연남동">📍 마포구 연남동</button>
+              <button type="button" class="location-chip" data-location="서울 성동구 성수동">📍 성동구 성수동</button>
+              <button type="button" class="location-chip" data-location="감자마을 감자1동">📍 감자1동</button>
+            </div>
+            <p class="field-error" id="writeLocationError" hidden>거래 동네를 입력해 주세요.</p>
+          </div>
+
+          <!-- 7. 판매 상태 (판매중 / 예약중 / 거래 완료) -->
+          <div class="form-group">
+            <div class="form-label-row">
+              <span class="form-label" id="writeStatusGroupLabel">
+                판매 상태 <span class="required-dot" title="필수">*</span>
+              </span>
+              <span class="form-helper">3가지 상태 중 선택</span>
+            </div>
+            <div class="status-radio-group" role="radiogroup" aria-labelledby="writeStatusGroupLabel">
+              <label class="status-radio-card status-card-sale">
+                <input type="radio" name="writeStatus" value="판매중" checked />
+                <span class="status-card-inner">
+                  <span class="status-badge status-sale">판매중</span>
+                  <span class="status-sub-text">즉시 거래 가능</span>
+                </span>
+              </label>
+
+              <label class="status-radio-card status-card-reserved">
+                <input type="radio" name="writeStatus" value="예약중" />
+                <span class="status-card-inner">
+                  <span class="status-badge status-reserved">예약중</span>
+                  <span class="status-sub-text">이웃과 약속중</span>
+                </span>
+              </label>
+
+              <label class="status-radio-card status-card-sold">
+                <input type="radio" name="writeStatus" value="거래 완료" />
+                <span class="status-card-inner">
+                  <span class="status-badge status-sold">거래 완료</span>
+                  <span class="status-sub-text">판매 마침</span>
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- 맨 아래 [작성 완료] 버튼 -->
+        <div class="write-footer">
+          <button type="submit" id="submitWriteBtn" class="btn btn-primary btn-submit-write">
+            <span aria-hidden="true">🥔</span>
+            <span>작성 완료</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       [화면 2] 상세 팝업 모달 (#detailModal)
+       - 위쪽 절반: 상품 이미지
+       - 그 아래 순서: 판매 상태 → 카테고리 → 상품명 → 판매 위치 → 업로드 시간 → 가격 → 상품 설명
+       - 판매자 정보: 닉네임, 프로필 이미지, 판매 지역
+       - 맨 아래: [관심 추가], [채팅 시작하기] 버튼
+       ======================================================================== -->
+  <dialog id="detailModal" class="detail-modal" closedby="any" aria-labelledby="detailTitle">
+    <div class="detail-modal__container">
+      <!-- 닫기 버튼 -->
+      <button type="button" id="closeDetailBtn" class="detail-close-btn" aria-label="상세 팝업 닫기">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <!-- 모달 스크롤 영역 -->
+      <div class="detail-modal__scroll-area">
+        <!-- 위쪽 절반: 상품 이미지 -->
+        <div class="detail-image-wrap">
+          <img
+            id="detailImage"
+            class="detail-image"
+            src=""
+            alt="상품 이미지"
+          />
+        </div>
+
+        <!-- 아래쪽 상품 상세 정보 (순서 엄수) -->
+        <div class="detail-content">
+          <!-- 1) 판매 상태 & 2) 카테고리 -->
+          <div class="detail-status-category-row">
+            <span id="detailStatus" class="status-badge status-sale">판매중</span>
+            <span id="detailCategory" class="detail-category-tag">디지털기기</span>
+          </div>
+
+          <!-- 3) 상품명 -->
+          <h2 id="detailTitle" class="detail-title">상품명</h2>
+
+          <!-- 4) 판매 위치 & 5) 업로드 시간 -->
+          <div class="detail-meta-row">
+            <span class="detail-meta-item">
+              <span aria-hidden="true">📍</span>
+              <span id="detailLocation">서울 강남구 역삼동</span>
+            </span>
+            <span class="meta-divider" aria-hidden="true">·</span>
+            <span class="detail-meta-item">
+              <span aria-hidden="true">🕒</span>
+              <time id="detailTime">10분 전</time>
+            </span>
+          </div>
+
+          <!-- 6) 가격 -->
+          <div id="detailPrice" class="detail-price">0원</div>
+
+          <!-- 7) 상품 설명 -->
+          <div class="detail-description-box">
+            <p id="detailDescription" class="detail-description"></p>
+          </div>
+
+          <!-- 판매자 정보: 프로필 이미지, 닉네임, 판매 지역 -->
+          <div class="seller-card" aria-label="판매자 정보">
+            <div class="seller-card__avatar-wrap">
+              <img
+                id="sellerAvatar"
+                class="seller-card__avatar"
+                src=""
+                alt="판매자 프로필 이미지"
+              />
+            </div>
+            <div class="seller-card__info">
+              <div class="seller-card__name-row">
+                <strong id="sellerNickname" class="seller-card__nickname">포슬감자</strong>
+                <span id="sellerMannerTemp" class="seller-card__badge">포슬온도 37.5°C 🥔</span>
+              </div>
+              <span id="sellerRegion" class="seller-card__region">서울 강남구 역삼동</span>
+            </div>
+          </div>
+
+          <!-- 작성자 본인에게만 보이는 관리 영역: 판매 상태 변경(판매중/예약중/거래 완료) & 수정/삭제 -->
+          <div id="ownerControlBox" class="owner-control-box" aria-label="내 게시글 관리" hidden>
+            <div class="owner-control__section">
+              <span class="owner-control__label">판매 상태 변경</span>
+              <div id="ownerStatusGroup" class="owner-status-group" role="group" aria-label="판매 상태 선택">
+                <button
+                  type="button"
+                  class="owner-status-btn"
+                  data-status-value="판매중"
+                  aria-pressed="true"
+                >
+                  판매중
+                </button>
+                <button
+                  type="button"
+                  class="owner-status-btn"
+                  data-status-value="예약중"
+                  aria-pressed="false"
+                >
+                  예약중
+                </button>
+                <button
+                  type="button"
+                  class="owner-status-btn"
+                  data-status-value="거래 완료"
+                  aria-pressed="false"
+                >
+                  거래 완료
+                </button>
+              </div>
+            </div>
+
+            <div class="owner-control__actions">
+              <button type="button" id="editProductBtn" class="btn btn-outline owner-action-btn">
+                <span aria-hidden="true">✏️</span>
+                <span>수정</span>
+              </button>
+              <button type="button" id="deleteProductBtn" class="btn btn-outline owner-action-btn owner-action-btn--delete">
+                <span aria-hidden="true">🗑️</span>
+                <span>삭제</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 맨 아래: [관심 추가]와 [채팅 시작하기] 버튼 -->
+      <footer class="detail-actions">
+        <button type="button" id="wishBtn" class="btn btn-outline detail-btn--wish" aria-pressed="false">
+          <span id="wishIcon" aria-hidden="true">🤍</span>
+          <span>관심 추가</span>
+        </button>
+        <button type="button" id="chatBtn" class="btn btn-primary detail-btn--chat">
+          <span aria-hidden="true">💬</span>
+          <span>채팅 시작하기</span>
+        </button>
+      </footer>
+    </div>
+  </dialog>
+
+  <!-- ========================================================================
+       [로그인 / 회원가입 모달 (#authModal)]
+       - 이메일·비밀번호 로그인 및 회원가입 (회원가입 시 닉네임 필수 입력)
+       ======================================================================== -->
+  <dialog id="authModal" class="auth-modal" closedby="any" aria-labelledby="authModalTitle">
+    <div class="auth-modal__container">
+      <button type="button" id="closeAuthBtn" class="detail-close-btn auth-close-btn" aria-label="로그인 창 닫기">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <div class="auth-modal__header">
+        <span class="hero-badge">🥔 포근한 우리 동네 감자</span>
+        <h2 id="authModalTitle" class="auth-modal__title">감자 마켓 시작하기</h2>
+        <p id="authModalSubtitle" class="auth-modal__subtitle">
+          이메일로 간편하게 로그인하고 이웃과 따뜻한 거래를 시작해 보세요.
+        </p>
+      </div>
+
+      <!-- 비로그인 상태에서 [글쓰기] 클릭 시 표시되는 안내 배너 -->
+      <div id="authWriteNotice" class="auth-write-notice" hidden>
+        <span aria-hidden="true">✏️</span>
+        <span>물건을 등록하려면 먼저 로그인이 필요해요. 로그인하면 바로 글쓰기 화면이 열립니다!</span>
+      </div>
+
+      <!-- 로그인 / 회원가입 탭 전환 -->
+      <div class="auth-tabs" role="tablist" aria-label="로그인 및 회원가입 전환">
+        <button
+          type="button"
+          id="authTabLogin"
+          class="auth-tab active"
+          role="tab"
+          aria-selected="true"
+          data-auth-mode="login"
+        >
+          로그인
+        </button>
+        <button
+          type="button"
+          id="authTabSignup"
+          class="auth-tab"
+          role="tab"
+          aria-selected="false"
+          data-auth-mode="signup"
+        >
+          회원가입
+        </button>
+      </div>
+
+      <!-- 공통 오류 메시지 배너 -->
+      <div id="authErrorBanner" class="write-error-banner auth-error-banner" role="alert" hidden>
+        <span aria-hidden="true">⚠️</span>
+        <span id="authErrorMessage">입력 정보를 다시 확인해 주세요.</span>
+      </div>
+
+      <!-- 1. 로그인 폼 -->
+      <form id="loginForm" class="auth-form" novalidate>
+        <div class="form-group">
+          <label for="loginEmail" class="form-label">
+            이메일 <span class="required-dot" title="필수">*</span>
+          </label>
+          <input
+            type="email"
+            id="loginEmail"
+            name="email"
+            class="form-input"
+            placeholder="example@gamza.kr"
+            autocomplete="username"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="current-password" class="form-label">
+            비밀번호 <span class="required-dot" title="필수">*</span>
+          </label>
+          <div class="password-input-wrapper">
+            <input
+              type="password"
+              id="current-password"
+              name="current-password"
+              class="form-input password-input"
+              placeholder="비밀번호를 입력해 주세요"
+              autocomplete="current-password"
+              required
+            />
+            <button
+              type="button"
+              id="toggleLoginPwBtn"
+              class="btn-toggle-pw"
+              aria-label="비밀번호 표시 전환"
+            >
+              보기
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" id="submitLoginBtn" class="btn btn-primary btn-auth-submit">
+          <span aria-hidden="true">🥔</span>
+          <span>로그인</span>
+        </button>
+      </form>
+
+      <!-- 2. 회원가입 폼 (닉네임 필수 입력 포함) -->
+      <form id="signupForm" class="auth-form" novalidate hidden>
+        <div class="form-group">
+          <div class="form-label-row">
+            <label for="signupNickname" class="form-label">
+              닉네임 <span class="required-dot" title="필수">*</span>
+            </label>
+            <span class="form-helper">장터에 표시될 별명 (2~20자)</span>
+          </div>
+          <input
+            type="text"
+            id="signupNickname"
+            name="nickname"
+            class="form-input"
+            placeholder="예: 포근한햇감자"
+            maxlength="20"
+            required
+            autocomplete="nickname"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="signupEmail" class="form-label">
+            이메일 <span class="required-dot" title="필수">*</span>
+          </label>
+          <input
+            type="email"
+            id="signupEmail"
+            name="email"
+            class="form-input"
+            placeholder="example@gamza.kr"
+            autocomplete="username"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <div class="form-label-row">
+            <label for="new-password" class="form-label">
+              비밀번호 <span class="required-dot" title="필수">*</span>
+            </label>
+            <span class="form-helper">6자 이상</span>
+          </div>
+          <div class="password-input-wrapper">
+            <input
+              type="password"
+              id="new-password"
+              name="new-password"
+              class="form-input password-input"
+              placeholder="비밀번호 6자 이상 입력"
+              minlength="6"
+              autocomplete="new-password"
+              required
+            />
+            <button
+              type="button"
+              id="toggleSignupPwBtn"
+              class="btn-toggle-pw"
+              aria-label="비밀번호 표시 전환"
+            >
+              보기
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" id="submitSignupBtn" class="btn btn-primary btn-auth-submit">
+          <span aria-hidden="true">🌱</span>
+          <span>회원가입 완료</span>
+        </button>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- 공통 토스트 알림 -->
+  <div id="gamzaToast" class="gamza-toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

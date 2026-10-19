@@ -1,0 +1,2455 @@
+/* ==========================================================================
+   중고 거래 웹 서비스 ‘감자 (Gamza)’ 통합 스타일시트 (styles.css)
+   - SEED Design System Foundations & Component Specifications 적용
+   - Reference:
+     * Foundations: https://seed-design.io/foundations/llms.txt
+     * Design Tokens: https://seed-design.io/llms/foundations/design-token/reference.txt
+     * Color Roles & Palette: https://seed-design.io/llms/foundations/color/color-role.txt
+     * Typography: https://seed-design.io/llms/foundations/typography.txt
+     * Spacing & Layout: https://seed-design.io/llms/foundations/spacing.txt, https://seed-design.io/llms/foundations/layout.txt
+     * Radius & Elevation: https://seed-design.io/llms/foundations/radius.txt, https://seed-design.io/llms/foundations/elevation.txt
+     * Feedback (Color & Scale): https://seed-design.io/llms/foundations/feedback/color.txt, https://seed-design.io/llms/foundations/feedback/scale.txt
+     * Components: Action Button, Badge, Chip, Switch, Field, Text Input, Select, Dialog, Manner Temp, Snackbar
+   ========================================================================== */
+
+:root {
+  color-scheme: light dark;
+
+  /* ------------------------------------------------------------------------
+     1. SEED Palette Tokens (theme-light)
+     ------------------------------------------------------------------------ */
+  --seed-palette-gray-00: #ffffff;
+  --seed-palette-gray-100: #f7f8f9;
+  --seed-palette-gray-200: #f3f4f5;
+  --seed-palette-gray-300: #eeeff1;
+  --seed-palette-gray-400: #dcdee3;
+  --seed-palette-gray-500: #d1d3d8;
+  --seed-palette-gray-600: #b0b3ba;
+  --seed-palette-gray-700: #868b94;
+  --seed-palette-gray-800: #555d6d;
+  --seed-palette-gray-900: #2a3038;
+  --seed-palette-gray-1000: #1a1c20;
+
+  --seed-palette-carrot-100: #fff2ec;
+  --seed-palette-carrot-200: #ffe8db;
+  --seed-palette-carrot-300: #ffd5c0;
+  --seed-palette-carrot-400: #ffb999;
+  --seed-palette-carrot-500: #ff9364;
+  --seed-palette-carrot-600: #ff6600;
+  --seed-palette-carrot-700: #e14d00;
+  --seed-palette-carrot-800: #b93901;
+  --seed-palette-carrot-900: #862b00;
+  --seed-palette-carrot-1000: #471601;
+
+  --seed-palette-blue-100: #eff6ff;
+  --seed-palette-blue-200: #e2edfc;
+  --seed-palette-blue-300: #cbdffa;
+  --seed-palette-blue-600: #5e98fe;
+  --seed-palette-blue-700: #217cf9;
+  --seed-palette-blue-800: #135fcd;
+  --seed-palette-blue-900: #0b4596;
+
+  --seed-palette-green-100: #edfaf6;
+  --seed-palette-green-200: #d9f6e9;
+  --seed-palette-green-300: #b9e9d2;
+  --seed-palette-green-700: #079171;
+  --seed-palette-green-800: #00745f;
+  --seed-palette-green-900: #075445;
+
+  --seed-palette-yellow-100: #fff7de;
+  --seed-palette-yellow-200: #fdefb9;
+  --seed-palette-yellow-300: #fbdc65;
+  --seed-palette-yellow-400: #e9c647;
+  --seed-palette-yellow-700: #9b7821;
+  --seed-palette-yellow-900: #4f3e1f;
+
+  --seed-palette-red-100: #fdf0f0;
+  --seed-palette-red-200: #fde7e7;
+  --seed-palette-red-300: #fed4d2;
+  --seed-palette-red-600: #fc6a66;
+  --seed-palette-red-700: #fa342c;
+  --seed-palette-red-800: #ca1d13;
+  --seed-palette-red-900: #921708;
+
+  --seed-palette-static-white: #ffffff;
+  --seed-palette-static-black: #000000;
+  --seed-palette-static-black-alpha-100: #00000007;
+  --seed-palette-static-black-alpha-200: #0000000c;
+  --seed-palette-static-black-alpha-300: #00000010;
+  --seed-palette-static-black-alpha-500: #0000002c;
+  --seed-palette-static-black-alpha-700: #00000074;
+  --seed-palette-static-black-alpha-900: #000000d0;
+
+  /* ------------------------------------------------------------------------
+     2. SEED Semantic Color Role Tokens ($color.fg / $color.bg / $color.stroke)
+     ------------------------------------------------------------------------ */
+  /* Foreground */
+  --seed-fg-brand: var(--seed-palette-carrot-600);
+  --seed-fg-brand-contrast: var(--seed-palette-carrot-700);
+  --seed-fg-neutral: var(--seed-palette-gray-1000);
+  --seed-fg-neutral-muted: var(--seed-palette-gray-800);
+  --seed-fg-neutral-subtle: var(--seed-palette-gray-700);
+  --seed-fg-neutral-inverted: var(--seed-palette-gray-00);
+  --seed-fg-placeholder: var(--seed-palette-gray-600);
+  --seed-fg-disabled: var(--seed-palette-gray-500);
+  --seed-fg-on-brand-solid: var(--seed-palette-static-white);
+  --seed-fg-on-neutral-solid: var(--seed-palette-gray-00);
+  --seed-fg-positive: var(--seed-palette-green-700);
+  --seed-fg-positive-contrast: var(--seed-palette-green-900);
+  --seed-fg-warning: var(--seed-palette-yellow-700);
+  --seed-fg-warning-contrast: var(--seed-palette-yellow-900);
+  --seed-fg-critical: var(--seed-palette-red-700);
+  --seed-fg-critical-contrast: var(--seed-palette-red-900);
+  --seed-fg-informative: var(--seed-palette-blue-700);
+  --seed-fg-informative-contrast: var(--seed-palette-blue-900);
+
+  /* Background & Layer */
+  --seed-bg-layer-basement: var(--seed-palette-gray-200);
+  --seed-bg-layer-default: var(--seed-palette-gray-00);
+  --seed-bg-layer-default-pressed: var(--seed-palette-gray-100);
+  --seed-bg-layer-floating: var(--seed-palette-gray-00);
+  --seed-bg-layer-floating-pressed: var(--seed-palette-gray-100);
+
+  --seed-bg-brand-solid: var(--seed-palette-carrot-600);
+  --seed-bg-brand-solid-pressed: var(--seed-palette-carrot-700);
+  --seed-bg-brand-weak: var(--seed-palette-carrot-100);
+  --seed-bg-brand-weak-pressed: var(--seed-palette-carrot-200);
+
+  --seed-bg-neutral-solid: var(--seed-palette-gray-900);
+  --seed-bg-neutral-solid-pressed: var(--seed-palette-gray-800);
+  --seed-bg-neutral-weak: var(--seed-palette-gray-200);
+  --seed-bg-neutral-weak-pressed: var(--seed-palette-gray-300);
+  --seed-bg-neutral-muted: var(--seed-palette-gray-100);
+  --seed-bg-neutral-subtle: var(--seed-palette-gray-00);
+  --seed-bg-neutral-inverted: var(--seed-palette-gray-900);
+  --seed-bg-neutral-inverted-pressed: var(--seed-palette-gray-800);
+  --seed-bg-disabled: var(--seed-palette-gray-200);
+
+  --seed-bg-positive-solid: var(--seed-palette-green-700);
+  --seed-bg-positive-weak: var(--seed-palette-green-100);
+  --seed-bg-positive-weak-pressed: var(--seed-palette-green-200);
+
+  --seed-bg-warning-solid: var(--seed-palette-yellow-300);
+  --seed-bg-warning-weak: var(--seed-palette-yellow-100);
+  --seed-bg-warning-weak-pressed: var(--seed-palette-yellow-200);
+
+  --seed-bg-critical-solid: var(--seed-palette-red-700);
+  --seed-bg-critical-weak: var(--seed-palette-red-100);
+  --seed-bg-critical-weak-pressed: var(--seed-palette-red-200);
+
+  --seed-bg-overlay: var(--seed-palette-static-black-alpha-700);
+  --seed-bg-transparent-pressed: var(--seed-palette-static-black-alpha-100);
+
+  /* Banner & Manner Temp */
+  --seed-banner-orange: #fff2e1;
+  --seed-banner-warm-gray: #f2f0ee;
+  --seed-manner-temp-l4-bg: #fff3e5;
+  --seed-manner-temp-l4-text: #f57e00;
+
+  /* Stroke */
+  --seed-stroke-brand-solid: var(--seed-palette-carrot-700);
+  --seed-stroke-brand-weak: var(--seed-palette-carrot-300);
+  --seed-stroke-neutral-contrast: var(--seed-palette-gray-1000);
+  --seed-stroke-neutral-solid: var(--seed-palette-gray-800);
+  --seed-stroke-neutral-weak: var(--seed-palette-gray-400);
+  --seed-stroke-neutral-muted: var(--seed-palette-static-black-alpha-300);
+  --seed-stroke-neutral-subtle: var(--seed-palette-static-black-alpha-200);
+  --seed-stroke-focus-ring: var(--seed-palette-blue-600);
+  --seed-stroke-positive-weak: var(--seed-palette-green-300);
+  --seed-stroke-positive-solid: var(--seed-palette-green-700);
+  --seed-stroke-warning-weak: var(--seed-palette-yellow-300);
+  --seed-stroke-warning-solid: var(--seed-palette-yellow-700);
+  --seed-stroke-critical-weak: var(--seed-palette-red-300);
+  --seed-stroke-critical-solid: var(--seed-palette-red-700);
+
+  /* ------------------------------------------------------------------------
+     3. SEED Dimension, Spacing, Radius, Typography, Shadow, Motion Tokens
+     ------------------------------------------------------------------------ */
+  --seed-dimension-x0_5: 2px;
+  --seed-dimension-x1: 4px;
+  --seed-dimension-x1_5: 6px;
+  --seed-dimension-x2: 8px;
+  --seed-dimension-x2_5: 10px;
+  --seed-dimension-x3: 12px;
+  --seed-dimension-x3_5: 14px;
+  --seed-dimension-x4: 16px;
+  --seed-dimension-x4_5: 18px;
+  --seed-dimension-x5: 20px;
+  --seed-dimension-x6: 24px;
+  --seed-dimension-x7: 28px;
+  --seed-dimension-x8: 32px;
+  --seed-dimension-x9: 36px;
+  --seed-dimension-x10: 40px;
+  --seed-dimension-x12: 48px;
+  --seed-dimension-x13: 52px;
+  --seed-dimension-x14: 56px;
+  --seed-dimension-x16: 64px;
+
+  --seed-spacing-x-between-chips: var(--seed-dimension-x2);
+  --seed-spacing-x-global-gutter: var(--seed-dimension-x4);
+  --seed-spacing-y-component-default: var(--seed-dimension-x3);
+  --seed-spacing-y-nav-to-title: var(--seed-dimension-x5);
+  --seed-spacing-y-screen-bottom: var(--seed-dimension-x14);
+  --seed-spacing-y-between-text: var(--seed-dimension-x1_5);
+
+  /* Radius ($radius.*) */
+  --seed-radius-r0_5: 2px;
+  --seed-radius-r1: 4px;
+  --seed-radius-r1_5: 6px;
+  --seed-radius-r2: 8px;
+  --seed-radius-r2_5: 10px;
+  --seed-radius-r3: 12px;
+  --seed-radius-r3_5: 14px;
+  --seed-radius-r4: 16px;
+  --seed-radius-r5: 20px;
+  --seed-radius-r6: 24px;
+  --seed-radius-full: 9999px;
+
+  /* Font Size ($font-size.t1 ~ t10) & Line Height ($line-height.t1 ~ t10) */
+  --seed-font-size-t1: 0.6875rem;   /* 11px */
+  --seed-font-size-t2: 0.75rem;     /* 12px */
+  --seed-font-size-t3: 0.8125rem;   /* 13px */
+  --seed-font-size-t4: 0.875rem;    /* 14px */
+  --seed-font-size-t5: 1rem;        /* 16px */
+  --seed-font-size-t6: 1.125rem;    /* 18px */
+  --seed-font-size-t7: 1.25rem;     /* 20px */
+  --seed-font-size-t8: 1.375rem;    /* 22px */
+  --seed-font-size-t9: 1.5rem;      /* 24px */
+  --seed-font-size-t10: 1.625rem;   /* 26px */
+
+  --seed-line-height-t1: 0.9375rem; /* 15px */
+  --seed-line-height-t2: 1rem;      /* 16px */
+  --seed-line-height-t3: 1.125rem;  /* 18px */
+  --seed-line-height-t4: 1.1875rem; /* 19px */
+  --seed-line-height-t5: 1.375rem;  /* 22px */
+  --seed-line-height-t6: 1.5rem;    /* 24px */
+  --seed-line-height-t7: 1.6875rem; /* 27px */
+  --seed-line-height-t8: 1.875rem;  /* 30px */
+  --seed-line-height-t9: 2rem;      /* 32px */
+  --seed-line-height-t10: 2.1875rem;/* 35px */
+
+  /* Font Weight ($font-weight.*) */
+  --seed-font-weight-regular: 400;
+  --seed-font-weight-medium: 500;
+  --seed-font-weight-bold: 700;
+
+  /* Shadow ($shadow.s1 ~ s3) */
+  --seed-shadow-s1: 0 1px 4px #00000014;
+  --seed-shadow-s2: 0 2px 10px #0000001a;
+  --seed-shadow-s3: 0 4px 16px #0000001f;
+
+  /* Duration, Timing Function & Feedback Scale ($duration.*, $timing-function.*, $scale.*) */
+  --seed-duration-d1: 50ms;
+  --seed-duration-d2: 100ms;
+  --seed-duration-d3: 150ms;
+  --seed-duration-d4: 200ms;
+  --seed-duration-d5: 250ms;
+  --seed-duration-d6: 300ms;
+  --seed-duration-color-transition: var(--seed-duration-d3);
+  --seed-duration-pressed-scale: var(--seed-duration-d3);
+
+  --seed-timing-easing: cubic-bezier(0.35, 0, 0.35, 1);
+  --seed-timing-enter: cubic-bezier(0, 0, 0.15, 1);
+  --seed-timing-exit: cubic-bezier(0.35, 0, 1, 1);
+  --seed-timing-pressed-scale: cubic-bezier(0, 0, 0.15, 1);
+
+  --seed-scale-s95: 0.95;
+  --seed-scale-s97: 0.97;
+  --seed-scale-s98: 0.98;
+}
+
+/* --------------------------------------------------------------------------
+   SEED Dark Theme Tokens (@media (prefers-color-scheme: dark))
+   Reference: https://seed-design.io/llms/foundations/design-token/reference.txt
+   -------------------------------------------------------------------------- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --seed-palette-gray-00: #000000;
+    --seed-palette-gray-100: #16171b;
+    --seed-palette-gray-200: #1d2025;
+    --seed-palette-gray-300: #2b2e35;
+    --seed-palette-gray-400: #393d46;
+    --seed-palette-gray-500: #5b606a;
+    --seed-palette-gray-600: #868b94;
+    --seed-palette-gray-700: #b0b3ba;
+    --seed-palette-gray-800: #dcdee3;
+    --seed-palette-gray-900: #e9eaec;
+    --seed-palette-gray-1000: #f3f4f5;
+
+    --seed-palette-carrot-100: #31241f;
+    --seed-palette-carrot-200: #4b291c;
+    --seed-palette-carrot-300: #6b311c;
+    --seed-palette-carrot-400: #923600;
+    --seed-palette-carrot-500: #bd4201;
+    --seed-palette-carrot-600: #e65200;
+    --seed-palette-carrot-700: #ff6600;
+    --seed-palette-carrot-800: #ff9e65;
+    --seed-palette-carrot-900: #eecebc;
+    --seed-palette-carrot-1000: #f4eeea;
+
+    --seed-palette-blue-100: #202742;
+    --seed-palette-blue-200: #1e3352;
+    --seed-palette-blue-300: #1a4275;
+    --seed-palette-blue-600: #1e82eb;
+    --seed-palette-blue-700: #41a2f9;
+    --seed-palette-blue-800: #83bcf9;
+    --seed-palette-blue-900: #b9d7fb;
+
+    --seed-palette-green-100: #202926;
+    --seed-palette-green-200: #20362e;
+    --seed-palette-green-300: #20493b;
+    --seed-palette-green-700: #22b27f;
+    --seed-palette-green-800: #35ce9a;
+    --seed-palette-green-900: #93e5c0;
+
+    --seed-palette-yellow-100: #302819;
+    --seed-palette-yellow-200: #413218;
+    --seed-palette-yellow-300: #543e15;
+    --seed-palette-yellow-400: #714e15;
+    --seed-palette-yellow-700: #ca901c;
+    --seed-palette-yellow-900: #e5d49b;
+
+    --seed-palette-red-100: #322323;
+    --seed-palette-red-200: #4f2624;
+    --seed-palette-red-300: #742826;
+    --seed-palette-red-600: #f73526;
+    --seed-palette-red-700: #ff6e60;
+    --seed-palette-red-800: #ffa299;
+    --seed-palette-red-900: #f8c5c3;
+
+    --seed-fg-brand: var(--seed-palette-carrot-700);
+    --seed-fg-brand-contrast: var(--seed-palette-carrot-700);
+    --seed-fg-neutral-inverted: var(--seed-palette-gray-100);
+    --seed-fg-on-neutral-solid: var(--seed-palette-gray-100);
+
+    --seed-bg-layer-basement: var(--seed-palette-gray-00);
+    --seed-bg-layer-default: var(--seed-palette-gray-100);
+    --seed-bg-layer-default-pressed: var(--seed-palette-gray-300);
+    --seed-bg-layer-floating: var(--seed-palette-gray-200);
+    --seed-bg-layer-floating-pressed: var(--seed-palette-gray-300);
+
+    --seed-bg-brand-solid: var(--seed-palette-carrot-700);
+    --seed-bg-brand-solid-pressed: var(--seed-palette-carrot-800);
+    --seed-bg-neutral-solid: var(--seed-palette-gray-1000);
+    --seed-bg-neutral-solid-pressed: var(--seed-palette-gray-800);
+    --seed-bg-neutral-weak: var(--seed-palette-gray-300);
+    --seed-bg-neutral-weak-pressed: var(--seed-palette-gray-400);
+    --seed-bg-neutral-muted: var(--seed-palette-gray-200);
+    --seed-bg-neutral-subtle: var(--seed-palette-gray-100);
+    --seed-bg-neutral-inverted: var(--seed-palette-gray-1000);
+    --seed-bg-disabled: var(--seed-palette-gray-300);
+
+    --seed-stroke-neutral-muted: #ffffff17;
+    --seed-stroke-neutral-subtle: #ffffff0d;
+
+    --seed-banner-orange: #42230a;
+    --seed-banner-warm-gray: #2f2b27;
+    --seed-manner-temp-l4-bg: #372301;
+    --seed-manner-temp-l4-text: #fbbe55;
+
+    --seed-shadow-s1: 0 1px 4px #00000080;
+    --seed-shadow-s2: 0 2px 10px #000000ad;
+    --seed-shadow-s3: 0 4px 16px #000000cc;
+  }
+}
+
+/* SEED Feedback Scale Accessibility: OS 동작 줄이기(Reduce Motion) 대응 */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --seed-scale-s95: 1;
+    --seed-scale-s97: 1;
+    --seed-scale-s98: 1;
+  }
+}
+
+/* ==========================================================================
+   기본 리셋 및 SEED Typography / Layout 파운데이션
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--seed-bg-layer-default);
+  color: var(--seed-fg-neutral);
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  font-size: var(--seed-font-size-t5);
+  line-height: 1.5;
+  text-align: start;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* SEED Content Layout: Standard Max-width 1040px, Margin 24px (md+) / 16px (base/sm) */
+.container {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 var(--seed-dimension-x6);
+}
+
+/* ==========================================================================
+   SEED Action Button (.btn)
+   Reference: https://seed-design.io/llms/components/action-button.txt
+   - Brand Solid: 서비스 핵심 액션('글쓰기', '채팅 시작하기', '작성 완료')에만 집중 사용
+   - Neutral Weak: 보조 액션('관심 추가', '필터 초기화' 등)
+   - Neutral Outline: 낮은 위계의 서브 액션('로그인', '목록으로 돌아가기', '사진 선택하기')
+   - Pressed Feedback: 표면 색상만 -pressed 토큰으로 전환, 전경(라벨/아이콘) 색상 유지, Scale 축소
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--seed-dimension-x1_5);
+  height: var(--seed-dimension-x10);
+  padding: 0 var(--seed-dimension-x4);
+  font-family: inherit;
+  font-size: var(--seed-font-size-t4);
+  line-height: var(--seed-line-height-t4);
+  font-weight: var(--seed-font-weight-bold);
+  border-radius: var(--seed-radius-r2);
+  border: 1px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+  user-select: none;
+  transform-origin: center center;
+  transition:
+    background-color var(--seed-duration-color-transition) var(--seed-timing-easing),
+    border-color var(--seed-duration-color-transition) var(--seed-timing-easing),
+    transform var(--seed-duration-pressed-scale) var(--seed-timing-pressed-scale);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--seed-stroke-focus-ring);
+  outline-offset: 2px;
+}
+
+.btn:active {
+  transform: scale(var(--seed-scale-s97));
+}
+
+/* Action Button — Brand Solid */
+.btn-primary {
+  background-color: var(--seed-bg-brand-solid);
+  color: var(--seed-fg-on-brand-solid);
+  border-color: transparent;
+}
+
+.btn-primary:hover {
+  background-color: var(--seed-bg-brand-solid-pressed);
+}
+
+.btn-primary:active {
+  background-color: var(--seed-bg-brand-solid-pressed);
+  color: var(--seed-fg-on-brand-solid);
+}
+
+/* Action Button — Neutral Outline */
+.btn-outline {
+  background-color: var(--seed-bg-layer-default);
+  color: var(--seed-fg-neutral);
+  border-color: var(--seed-stroke-neutral-weak);
+}
+
+.btn-outline:hover {
+  background-color: var(--seed-bg-layer-default-pressed);
+}
+
+.btn-outline:active {
+  background-color: var(--seed-bg-neutral-weak);
+  color: var(--seed-fg-neutral);
+}
+
+/* Action Button — Neutral Weak */
+.btn-secondary {
+  background-color: var(--seed-bg-neutral-weak);
+  color: var(--seed-fg-neutral);
+  border-color: transparent;
+}
+
+.btn-secondary:hover {
+  background-color: var(--seed-bg-neutral-weak-pressed);
+}
+
+.btn-secondary:active {
+  background-color: var(--seed-bg-neutral-weak-pressed);
+  color: var(--seed-fg-neutral);
+}
+
+.btn-full {
+  width: 100%;
+}
+
+/* ==========================================================================
+   SEED Badge (.status-badge, .card-category-tag, .detail-category-tag)
+   Reference: https://seed-design.io/llms/components/badge.txt
+   - Weak 스타일을 기본으로 사용하여 반복 구조에서의 시각적 부담 완화
+   - 상태별 Tone: 판매중(Positive), 예약중(Warning), 거래 완료(Neutral)
+   ========================================================================== */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 22px;
+  padding: var(--seed-dimension-x0_5) var(--seed-dimension-x2);
+  border-radius: var(--seed-radius-r1);
+  font-size: var(--seed-font-size-t2);
+  line-height: var(--seed-line-height-t2);
+  font-weight: var(--seed-font-weight-bold);
+  white-space: nowrap;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.status-sale {
+  background-color: var(--seed-bg-positive-weak);
+  color: var(--seed-fg-positive);
+}
+
+.status-reserved {
+  background-color: var(--seed-bg-warning-weak);
+  color: var(--seed-fg-warning);
+}
+
+.status-sold {
+  background-color: var(--seed-bg-neutral-weak);
+  color: var(--seed-fg-neutral-subtle);
+}
+
+/* ==========================================================================
+   상단 공통 헤더 (Top Navigation / GNB)
+   Reference: https://seed-design.io/llms/foundations/elevation.txt
+   - Level 1 Local Component: 스크롤 시 하단 Divider($color.stroke.neutral-subtle)로 영역 구분
+   ========================================================================== */
+.gamza-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--seed-bg-layer-default);
+  border-bottom: 1px solid var(--seed-stroke-neutral-subtle);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--seed-dimension-x4);
+  min-height: var(--seed-dimension-x16);
+  padding-top: var(--seed-dimension-x2_5);
+  padding-bottom: var(--seed-dimension-x2_5);
+}
+
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--seed-dimension-x2_5);
+  text-decoration: none;
+  color: var(--seed-fg-neutral);
+  flex-shrink: 0;
+  padding: var(--seed-dimension-x1) var(--seed-dimension-x2);
+  border-radius: var(--seed-radius-r2);
+  transform-origin: center center;
+  transition:
+    background-color var(--seed-duration-color-transition) var(--seed-timing-easing),
+    transform var(--seed-duration-pressed-scale) var(--seed-timing-pressed-scale);
+}
+
+.brand-logo:hover {
+  background-color: var(--seed-bg-transparent-pressed);
+}
+
+.brand-logo:active {
+  background-color: var(--seed-bg-transparent-pressed);
+  transform: scale(var(--seed-scale-s97));
+}
+
+.brand-logo:focus-visible {
+  outline: 2px solid var(--seed-stroke-focus-ring);
+  outline-offset: 2px;
+}
+
+.logo-icon {
+  font-size: var(--seed-font-size-t9);
+  line-height: 1;
+}
+
+.logo-text-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-title {
+  font-size: var(--seed-font-size-t7);
+  line-height: var(--seed-line-height-t6);
+  font-weight: var(--seed-font-weight-bold);
+  color: var(--seed-fg-brand);
+  letter-spacing: -0.02em;
+}
+
+.logo-subtitle {
+  font-size: var(--seed-font-size-t2);
+  line-height: var(--seed-line-height-t2);
+  font-weight: var(--seed-font-weight-medium);
+  color: var(--seed-fg-neutral-subtle);
+}
+
+/* 상단 검색창 (SEED Text Input Anatomy: Prefix Icon + Input + Clear Button) */
+.search-wrapper {
+  position: relative;
+  flex: 1;
+  max-width: 460px;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: var(--seed-dimension-x3_5);
+  color: var(--seed-fg-neutral-subtle);
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  height: var(--seed-dimension-x10);
+  padding: 0 var(--seed-dimension-x9) 0 var(--seed-dimension-x10);
+  background-color: var(--seed-bg-neutral-weak);
+  border: 1px solid transparent;
+  border-radius: var(--seed-radius-r2);
+  font-family: inherit;
+  font-size: var(--seed-font-size-t4);
+  line-height: var(--seed-line-height-t4);
+  color: var(--seed-fg-neutral);
+  transition:
+    background-color var(--seed-duration-color-transition) var(--seed-timing-easing),
+    border-color var(--seed-duration-color-transition) var(--seed-timing-easing);
+}
+
+.search-input::placeholder {
+  color: var(--seed-fg-placeholder);
+}
+
+.search-input:focus {
+  outline: none;
+  background-color: var(--seed-bg-layer-default);
+  border-color: var(--seed-stroke-neutral-contrast);
+}
+
+.search-input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.clear-search-btn {
+  position: absolute;
+  right: var(--seed-dimension-x2_5);
+  width: var(--seed-dimension-x5);
+  height: var(--seed-dimension-x5);
+  border-radius: var(--seed-radius-full);
+  border: none;
+  background-color: var(--seed-palette-gray-500);
+  color: var(--seed-palette-static-white);
+  font-size: var(--seed-font-size-t1);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--seed-duration-pressed-scale) var(--seed-timing-pressed-scale);
+}
+
+.clear-search-btn:active {
+  transform: scale(var(--seed-scale-s95));
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--seed-dimension-x2);
+  flex-shrink: 0;
+}
+
+.btn-icon {
+  font-size: var(--seed-font-size-t5);
+  line-height: 1;
+}
+
+/* ==========================================================================
+   [화면 1] 상품 목록 화면 (#listScreen)
+   ========================================================================== */
+.list-main {
+  padding-top: var(--seed-spacing-y-nav-to-title);
+  padding-bottom: var(--seed-spacing-y-screen-bottom);
+}
+
+/* 소개 배너 ($color.banner.orange & SEED Callout/Banner 토큰 적용) */
+.hero-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--seed-dimension-x6);
+  padding: var(--seed-dimension-x6) var(--seed-dimension-x7);
+  margin-bottom: var(--seed-dimension-x6);
+  background-color: var(--seed-banner-orange);
+  border-radius: var(--seed-radius-r4);
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--seed-dimension-x1) var(--seed-dimension-x2_5);
+  background-color: var(--seed-bg-brand-weak);
+  color: var(--seed-fg-brand-contrast);
+  border-radius: var(--seed-radius-r1_5);
+  font-size: var(--seed-font-size-t2);
+  line-height: var(--seed-line-height-t2);
+  font-weight: var(--seed-font-weight-bold);
+  margin-bottom: var(--seed-dimension-x2);
+}
+
+.hero-title {
+  margin: 0 0 var(--seed-spacing-y-between-text);
+  font-size: var(--seed-font-size-t8);
+  line-height: var(--seed-line-height-t8);
+  font-weight: var(--seed-font-weight-bold);
+  color: var(--seed-fg-neutral);
+  letter-spacing: -0.02em;
+}
+
+.hero-title strong {
+  color: var(--seed-fg-brand);
+}
+
+.hero-desc {
+  margin: 0;
+  font-size: var(--seed-font-size-t4);
+  line-height: var(--seed-line-height-t4);
+  color: var(--seed-fg-neutral-muted);
+  text-wrap: pretty;
+}
+
+.potato-mascot {
+  width: var(--seed-dimension-x16);
+  height: var(--seed-dimension-x16);
+  border-radius: var(--seed-radius-full);
+  background-color: var(--seed-bg-layer-default);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  box-shadow: var(--seed-shadow-s1);
+}
+
+/* ==========================================================================
+   필터 영역: SEED Chip Group (Category Tabs) & SEED Switch (거래 가능만 보기)
+   Reference:
+   - Chip: https://seed-design.io/llms/components/chip.txt
+   - Switch: https://seed-design.io/llms/components/switch.txt
+   ========================================================================== */
+.filter-section {
+  margin-bottom: var(--seed-dimension-x5);
+}
+
+.filter-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--seed-dimension-x3);
+  flex-wrap: wrap;
+}
+
+/* SEED Chip Group: Scrollable Layout, spacing-x.between-chips (8px) */
+.category-list {
+  display: flex;
+  align-items: center;
+  gap: var(--seed-spacing-x-between-chips);
+  overflow-x: auto;
+  padding-bottom: var(--seed-dimension-x1);
+  scrollbar-width: none;
+}
+
+.category-list::-webkit-scrollbar {
+  display: none;
+}
+
+.category-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--seed-dimension-x9);
+  padding: 0 var(--seed-dimension-x3_5);
+  border-radius: var(--seed-radius-full);
+  border: 1px solid var(--seed-stroke-neutral-weak);
+  background-color: var(--seed-bg-layer-default);
+  color: var(--seed-fg-neutral-muted);
+  font-family: inherit;
+  font-size: var(--seed-font-size-t4);
+  line-height: var(--seed-line-height-t4);
+  font-weight: var(--seed-font-weight-medium);
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+  transform-origin: center center;
+  /* Feedback Color 가이드라인: 색이 선택 상태를 나타내는 요소는 누르는 동안 축소만 일어나고 색은 손을 뗀 뒤 변경 */
+  transition: transform var(--seed-duration-pressed-scale) var(--seed-timing-pressed-scale);
+}
+
+.category-btn:hover {
+  background-color: var(--seed-bg-layer-default-pressed);
+}
+
+.category-btn:active {
+  transform: scale(var(--seed-scale-s95));
+}
+
+.category-btn:focus-visible {
+  outline: 2px solid var(--seed-stroke-focus-ring);
+  outline-offset: 2px;
+}
+
+/* Selected Chip: SEED Neutral Solid ($color.bg.neutral-solid / $color.fg.on-neutral-solid) */
+.category-btn.active {
+  background-color: var(--seed-bg-neutral-solid);
+  border-color: var(--seed-bg-neutral-solid);
+  color: var(--seed-fg-on-neutral-solid);
+  font-weight: var(--seed-font-weight-bold);
+}
+
+/* SEED Switch: Switch Mark (Track + Thumb) + Label */
+.available-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--seed-dimension-x2);
+  min-height: var(--seed-dimension-x9);
+  padding: var(--seed-dimension-x1) var(--seed-dimension-x2);
+  border-radius: var(--seed-radius-r2);
+  border: none;
+  background-color: transparent;
+  color: var(--seed-fg-neutral);
+  font-family: inherit;
+  font-size: var(--seed-font-size-t4);
+  line-height: var(--seed-line-height-t4);
+  font-weight: var(--seed-font-weight-medium);
+  cursor: pointer;
+  user-select: none;
+  transform-origin: center center;
+  transition: transform var(--seed-duration-pressed-scale) var(--seed-timing-pressed-scale);
+}
+
+.available-toggle-btn:active {
+  transform: scale(var(--seed-scale-s97));
+}
+
+.available-toggle-btn:focus-visible {
+  outline: 2px solid var(--seed-stroke-focus-ring);
+  outline-offset: 2px;
+}
+
+/* Switch Mark (Size 24 규격: Track 44x24, Thumb 20x20) */
+.toggle-track {
+  position: relative;
+  width: 40px;
+  height: 24px;
+  border-radius: var(--seed-radius-full);
+  background-color: var(--seed-palette-gray-400);
+  transition: background-color var(--seed-duration-color-transition) var(--seed-timing-easing);
+  flex-shrink: 0;
+}
+
+.toggle-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: var(--seed-radius-full);
+  background-color: var(--seed-palette-static-white);
+  box-shadow: var(--seed-shadow-s1);
+  transition: transform var(--seed-duration-color-transition) var(--seed-timing-easing);
+}
+
+.available-toggle-btn[aria-pressed="true"] .toggle-track {
+  background-color: var(--seed-bg-brand-solid);
+}
+
+.available-toggle-btn[aria-pressed="true"] .toggle-thumb {
+  transform: translateX(16px);
+}
+
+.filter-meta-bar {
+  margin-top: var(--seed-dimension-x3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.result-count-text {
+  margin: 0;
+  font-size: var(--seed-font-size-t3);
+  line-height: var(--seed-line-height-t3);
+  color: var(--seed-fg-neutral-muted);
+}
+
+.result-count-text strong {
+  color: var(--seed-fg-brand);
+  font-weight: var(--seed-font-weight-bold);
+  margin: 0 2px;
+}
+
+.active-filter-summary {
+  margin-left: var(--seed-dimension-x1_5);
+  color: var(--seed-fg-neutral-subtle);
+}
+
+/* ==========================================================================
+   상품 카드 목록 그리드 (SEED Content Layout Grid & Image Frame / Card)
+   - Gutter: 24px ($dimension.x6)
+   - Pressed Scale: 카드 전체 클릭 시 Content/Root Scale($scale.s98) 및 표면 피드백
+   ========================================================================== */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--seed-dimension-x6);
+}
+
+.product-card {
+  background-color: var(--seed-bg-layer-default);
+  border: 1px solid var(--seed-stroke-neutral-subtle);
+  border-radius: var(--seed-radius-r3);
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  transform-origin: center center;
+  transition:
+    background-color var(--seed-duration-color-transition) var(--seed-timing-easing),
+    border-color var(--seed-duration-color-transition) var(--seed-timing-easing),
+    box-shadow var(--seed-duration-color-transition) var(--seed-timing-easing),
+    transform var(--seed-duration-pressed-scale) var(--seed-timing-pressed-scale);
+}
+
+.product-card:hover {
+  background-color: var(--seed-bg-layer-default-pressed);
+  border-color: var(--seed-stroke-neutral-weak);
+  box-shadow: var(--seed-shadow-s1);
+}
+
+.product-card:active {
+  background-color: var(--seed-bg-layer-default-pressed);
+  transform: scale(var(--seed-scale-s98));
+}
+
+.product-card:focus-visible {
+  outline: 2px solid var(--seed-stroke-focus-ring);
+  outline-offset: 2px;
+}
+
+.card-image-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background-color: var(--seed-bg-neutral-muted);
+  overflow: hidden;
+  border-bottom: 1px solid var(--seed-stroke-neutral-subtle);
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--seed-duration-d6) var(--seed-timing-easing);
+}
+
+.product-card:hover .card-image {
+  transform: scale(1.03);
+}
+
+.product-card[data-status="거래 완료"] .card-image {
+  filter: grayscale(24%) opacity(0.84);
+}
+
+/* 이미지 위 카테고리 배지: Badge 가이드라인에 따라 배경 대비가 있는 Solid/Floating 표면 사용 */
+.card-category-tag {
+  position: absolute;
+  top: var(--seed-dimension-x3);
+  left: var(--seed-dimension-x3);
+  padding: var(--seed-dimension-x1) var(--seed-dimension-x2);
+  border-radius: var(--seed-radius-r1);
+  background-color: var(--seed-palette-static-black-alpha-700);
+  color: var(--seed-palette-static-white);
+  font-size: var(--seed-font-size-t2);
+  line-height: var(--seed-line-height-t2);
+  font-weight: var(--seed-font-weight-medium);
+  backdrop-filter: blur(4px);
+}
+
+.card-body {
+  padding: var(--seed-dimension-x4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--seed-dimension-x1_5);
+  flex: 1;
+}
+
+.card-title {
+  margin: 0;
+  font-size: var(--seed-font-size-t5);
+  line-height: var(--seed-line-height-t5);
+  font-weight: var(--seed-font-weight-regular);
+  color: var(--seed-fg-neutral);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow-wrap: break-word;
+}
+
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--seed-dimension-x1);
+  font-size: var(--seed-font-size-t3);
+  line-height: var(--seed-line-height-t3);
+  color: var(--seed-fg-neutral-subtle);
+  flex-wrap: wrap;
+}
+
+.card-location {
+  color: var(--seed-fg-neutral-subtle);
+}
+
+.meta-divider {
+  color: var(--seed-fg-neutral-subtle);
+}
+
+.card-time {
+  color: var(--seed-fg-neutral-subtle);
+}
+
+.card-footer {
+  margin-top: auto;
+  padding-top: var(--seed-dimension-x2_5);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--seed-dimension-x2);
+}
+
+.card-price {
+  font-size: var(--seed-font-size-t6);
+  line-height: var(--seed-line-height-t6);
+  font-weight: var(--seed-font-weight-bold);
+  color: var(--seed-fg-neutral);
+  letter-spacing: -0.01em;
+}
+
+/* SEED Result Section (빈 상태 UI)
+   Reference: https://seed-design.io/llms/components/result-section.txt */
+.empty-state {
+  text-align: center;
+  padding: var(--seed-dimension-x16) var(--seed-dimension-x6);
+  background-color: var(--seed-bg-neutral-muted);
+  border-radius: var(--seed-radius-r4);
+  margin-top: var(--seed-dimension-x3);
+}
+
+.empty-icon {
+  font-size: var(--seed-font-size-t10);
+  margin-bottom: var(--seed-dimension-x3);
+}
+
+.empty-title {
+  margin: 0 0 var(--seed-spacing-y-between-text);
+  font-size: var(--seed-font-size-t6);
+  line-height: var(--seed-line-height-t6);
+  font-weight: var(--seed-font-weight-bold);
+  color: var(--seed-fg-neutral);
+}
+
+.empty-desc {
+  margin: 0 0 var(--seed-dimension-x5);
+  font-size: var(--seed-font-size-t4);
+  line-height: var(--seed-line-height-t4);
+  color: var(--seed-fg-neutral-subtle);
+}
+
+/* ==========================================================================
+   [화면 2] 상세 팝업 모달 (#detailModal)
+   Reference: https://seed-design.io/llms/components/dialog.txt
+   - Elevation Level 3 ($color.bg.layer-floating, $shadow.s3, $color.bg.overlay)
+   - Size: Medium (480px on md+ 768px+, 90vw on <768px), Max Height 80vh
+   - Action Button Footer: Neutral Weak (30%) + Brand Solid (70%) 3:7 비율 배치
+   ========================================================================== */
+dialog:modal {
+  overscroll-behavior: contain;
+}
+
+dialog::backdrop {
+  overflow: hidden;
+  overscroll-behavior: contain;
+  background-color: var(--seed-bg-overlay);
+}
+
+.detail-modal {
+  padding: 0;
+  border: 1px solid var(--seed-stroke-neutral-subtle);
+  border-radius: var(--seed-radius-r5);
+  background-color: var(--seed-bg-layer-floating);
+  color: var(--seed-fg-neutral);
+  width: 480px;
+  max-width: 90vw;
+  max-height: 80vh;
+  margin: auto;
+  box-shadow: var(--seed-shadow-s3);
+  overflow: hidden;
+}
+
+.detail-modal[open] {
+  display: flex;
+  flex-direction: column;
+  animation: seedDialogEnter var(--seed-duration-d4) var(--seed-timing-enter);
+}
+
+@keyframes seedDialogEnter {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.detail-modal__container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: 80vh;
+  background-color: var(--seed-bg-layer-floating);
+  overflow: hidden;
+}
+
+/* Dialog Close Button */
+.detail-close-btn {
+  position: absolute;
+  top: var(--seed-dimension-x3_5);
+  right: var(--seed-dimension-x3_5);
+  z-index: 20;
+  width: var(--seed-dimension-x9);
+  height: var(--seed-dimension-x9);
+  border-radius: var(--seed-radius-full);
+  border: none;
+  background-color: var(--seed-palette-static-black-alpha-700);
+  color: var(--seed-palette-static-white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transform-origin: center center;
+  transition:
+    background-color var(--seed-duration-color-transition) var(--seed-timing-easing),
+    transform var(--seed-duration-pressed-scale) var(--seed-timing-pressed-scale);
+}
+
+.detail-close-btn:hover {
+  background-color: var(--seed-palette-static-black-alpha-900);
+}
+
+.detail-close-btn:active {
+  transform: scale(var(--seed-scale-s95));
+}
+
+.detail-close-btn:focus-visible {
+  outline: 2px solid var(--seed-stroke-focus-ring);
+  outline-offset: 2px;
+}
+
+.detail-modal__scroll-area {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 위쪽 절반: 상품 이미지 영역 (SEED Image Frame) */
+.detail-image-wrap {
+  position: relative;
+  width: 100%;
+  height: 38vh;
+  min-height: 220px;
+  max-height: 320px;
+  background-color: var(--seed-bg-neutral-muted);
+  overflow: hidden;
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--seed-stroke-neutral-subtle);
+}
+
+.detail-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 아래쪽 상세 정보 영역 */
+.detail-content {
+  padding: var(--seed-dimension-x5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--seed-dimension-x3);
+  background-color: var(--seed-bg-layer-floating);
+}
+
+.detail-status-category-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--seed-dimension-x1_5);
+}
+
+/* 카테고리 표시 Badge: Weak Neutral 스타일 */
+.detail-category-tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  padding: var(--seed-dimension-x0_5) var(--seed-dimension-x2);
+  border-radius: var(--seed-radius-r1);
+  font-size: var(--seed-font-size-t2);
+  line-height: var(--seed-line-height-t2);
+  font-weight: var(--seed-font-weight-medium);
+  background-color: var(--seed-bg-neutral-weak);
+  color: var(--seed-fg-neutral-muted);
+}
+
+.detail-title {
+  margin: 0;
+  font-size: var(--seed-font-size-t7);
+  line-height: var(--seed-line-height-t7);
+  font-weight: var(--seed-font-weight-bold);
+  color: var(--seed-fg-neutral);
+  letter-spacing: -0.01em;
+  word-break: keep-all;
+}
+
+.detail-meta-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--seed-dimension-x1_5);
+  font-size: var(--seed-font-size-t3);
+  line-height: var(--seed-line-height-t3);
+  color: var(--seed-fg-neutral-subtle);
+}
+
+.detail-meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--seed-dimension-x1);
+}
+
+.detail-price {
+  padding-bottom: var(--seed-dimension-x3_5);
+  border-bottom: 1px solid var(--seed-stroke-neutral-subtle);
+  font-size: var(--seed-font-size-t7);
+  line-height: var(--seed-line-height-t7);
+  font-weight: var(--seed-font-weight-bold);
+  color: var(--seed-fg-neutral);
+}
+
+.detail-description-box {
+  padding: var(--seed-dimension-x1) 0;
+}
+
+.detail-description {
+  margin: 0;
+  max-width: 80ch;
+  font-size: var(--seed-font-size-t5);
+  line-height: 1.6;
+  color: var(--seed-fg-neutral);
+  white-space: pre-line;
+  overflow-wrap: break-word;
+  text-wrap: pretty;
+}
+
+/* 판매자 정보 카드 (SEED Avatar + Manner Temp Badge)
+   Reference: https://seed-design.io/llms/components/manner-temp.txt */
+.seller-card {
+  margin-top: var(--seed-dimension-x1);
+  padding: var(--seed-dimension-x3_5) var(--seed-dimension-x4);
+  border-radius: var(--seed-radius-r3);
+  background-color: var(--seed-bg-neutral-muted);
+  display: flex;
+  align-items: center;
+  gap: var(--seed-dimension-x3);
+}
+
+.seller-card__avatar-wrap {
+  width: var(--seed-dimension-x12);
+  height: var(--seed-dimension-x12);
+  border-radius: var(--seed-radius-full);
+  overflow: hidden;
+  border: 1px solid var(--seed-stroke-neutral-subtle);
+  background-color: var(--seed-bg-layer-default);
+  flex-shrink: 0;
+}
+
+.seller-card__avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.seller-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--seed-dimension-x0_5);
+  min-width: 0;
+  flex: 1;
+}
+
+.seller-card__name-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--seed-dimension-x2);
+}
+
+.seller-card__nickname {
+  font-size: var(--seed-font-size-t4);
+  line-height: var(--seed-line-height-t4);
+  font-weight: var(--seed-font-weight-bold);
+  color: var(--seed-fg-neutral);
+}
+
+/* SEED Manner Temp Badge ($color.manner-temp.l4.bg / $color.manner-temp.l4.text) */
+.seller-card__badge {
+  font-size: var(--seed-font-size-t2);
+  line-height: var(--seed-line-height-t2);
+  font-weight: var(--seed-font-weight-bold);
+  color: var(--seed-manner-temp-l4-text);
+  background-color: var(--seed-manner-temp-l4-bg);
+  padding: var(--seed-dimension-x0_5) var(--seed-dimension-x2);
+  border-radius: var(--seed-radius-r1);
+  flex-shrink: 0;
+}
+
+.seller-card__region {
+  font-size: var(--seed-font-size-t3);
+  line-height: var(--seed-line-height-t3);
+  color: var(--seed-fg-neutral-subtle);
+}
+
+/* 모달 하단 액션 바: SEED Action Button Solid 조합 (Neutral Weak 3 : Brand Solid 7 비율)
+   Reference: https://seed-design.io/llms/components/action-button.txt */
+.detail-actions {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--seed-dimension-x2);
+  padding: var(--seed-dimension-x3_5) var(--seed-dimension-x5);
+  background-color: var(--seed-bg-layer-floating);
+  border-top: 1px solid var(--seed-stroke-neutral-subtle);
+}
+
+.detail-btn--wish {
+  flex: 3 1 0%;
+  height: var(--seed-dimension-x12);
+  font-size: var(--seed-font-size-t5);
+  background-color: var(--seed-bg-neutral-weak);
+  color: var(--seed-fg-neutral);
+  border-color: transparent;
+}
+
+.detail-btn--wish:hover {
+  background-color: var(--seed-bg-neutral-weak-pressed);
+}
+
+.detail-btn--wish.is-active {
+  background-color: var(--seed-bg-brand-weak);
+  color: var(--seed-fg-brand-contrast);
+  border-color: transparent;
+}
+
+.detail-btn--chat {
+  flex: 7 1 0%;
+  height: var(--seed-dimension-x12);
+  font-size: var(--seed-font-size-t5);
+}
+
+/* ==========================================================================
+   [화면 3] 글쓰기 화면 (#writeScreen)
+   Reference:
+   - Field: https://seed-design.io/llms/components/field.txt
+   - Text Input & Textarea: https://seed-design.io/llms/components/text-input.txt
+   - Select: https://seed-design.io/llms/components/select.txt
+   ========================================================================== */
+.write-screen {
+  padding-top: var(--seed-spacing-y-nav-to-title);
+  padding-bottom: var(--seed-spacing-y-screen-bottom);
+  animation: seedScreenFadeIn var(--seed-duration-d4) var(--seed-timing-enter);
+}
+
+@keyframes seedScreenFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* SEED Dashboard Low Density Max-width: 720px */
+.write-container {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.write-header {
+  margin-bottom: var(--seed-dimension-x5);
+}
+
+.btn-back-list {
+  margin-bottom: var(--seed-dimension-x3_5);
+}
+
+.write-header-card {
+  background-color: var(--seed-banner-warm-gray);
+  border-radius: var(--seed-radius-r4);
+  padding: var(--seed-dimension-x5) var(--seed-dimension-x6);
+}
+
+.write-title {
+  margin: 0 0 var(--seed-spacing-y-between-text);
+  font-size: var(--seed-font-size-t8);
+  line-height: var(--seed-line-height-t8);
+  font-weight: var(--seed-font-weight-bold);
+  color: var(--seed-fg-neutral);
+}
+
+.write-subtitle {
+  margin: 0;
+  font-size: var(--seed-font-size-t4);
+  line-height: var(--seed-line-height-t4);
+  color: var(--seed-fg-neutral-muted);
+  text-wrap: pretty;
+}
+
+.write-form {
+  background-color: var(--seed-bg-layer-default);
+  border: 1px solid var(--seed-stroke-neutral-subtle);
+  border-radius: var(--seed-radius-r4);
+  padding: var(--seed-dimension-x6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--seed-dimension-x6);
+}
+
+/* SEED Callout / Page Banner (Critical Tone) */
+.write-error-banner {
+  display: flex;
+  align-items: center;
+  gap: var(--seed-dimension-x2_5);
+  padding: var(--seed-dimension-x3) var(--seed-dimension-x4);
+  background-color: var(--seed-bg-critical-weak);
+  color: var(--seed-fg-critical-contrast);
+  border: 1px solid var(--seed-stroke-critical-weak);
+  border-radius: var(--seed-radius-r2_5);
+  font-size: var(--seed-font-size-t4);
+  line-height: var(--seed-line-height-t4);
+  font-weight: var(--seed-font-weight-medium);
+}
+
+/* SEED Field Anatomy: Header (Label + Requirement Mark + Helper/Count) + Input + Footer (Error) */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--seed-dimension-x2);
+}
+
+/* Text Input 2열 구성 가이드라인: 최소 16px($dimension.x4) 이상 간격 확보 */
+.form-row-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--seed-dimension-x4);
+}
+
+.form-label-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--seed-dimension-x2);
+  flex-wrap: wrap;
+}
+
+.form-label {
+  font-size: var(--seed-font-size-t4);
+  line-height: var(--seed-line-height-t4);
+  font-weight: var(--seed-font-weight-bold);
+  color: var(--seed-fg-neutral);
+}
+
+.required-dot {
+  color: var(--seed-fg-critical);
+  margin-left: var(--seed-dimension-x0_5);
+}
+
+.form-helper {
+  font-size: var(--seed-font-size-t3);
+  line-height: var(--seed-line-height-t3);
+  color: var(--seed-fg-neutral-subtle);
+}
+
+.price-preview-text {
+  font-size: var(--seed-font-size-t3);
+  line-height: var(--seed-line-height-t3);
+  font-weight: var(--seed-font-weight-bold);
+  color: var(--seed-fg-brand);
+}
+
+/* SEED Text Input, Select Trigger, Textarea Outline Variant */
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: var(--seed-dimension-x3) var(--seed-dimension-x3_5);
+  font-family: inherit;
+  font-size: var(--seed-font-size-t5);
+  line-height: var(--seed-line-height-t5);
+  color: var(--seed-fg-neutral);
+  background-color: var(--seed-bg-layer-default);
+  border: 1px solid var(--seed-stroke-neutral-weak);
+  border-radius: var(--seed-radius-r2_5);
+  transition:
+    border-color var(--seed-duration-color-transition) var(--seed-timing-easing),
+    background-color var(--seed-duration-color-transition) var(--seed-timing-easing);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--seed-fg-placeholder);
+}
+
+.form-input:hover,
+.form-select:hover,
+.form-textarea:hover {
+  border-color: var(--seed-stroke-neutral-solid);
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--seed-stroke-neutral-contrast);
+  box-shadow: inset 0 0 0 1px var(--seed-stroke-neutral-contrast);
+}
+
+/* Error State ($color.stroke.critical-solid) */
+.form-input.input-invalid,
+.form-select.input-invalid,
+.form-textarea.input-invalid {
+  border-color: var(--seed-stroke-critical-solid);
+}
+
+.form-input.input-invalid:focus,
+.form-select.input-invalid:focus,
+.form-textarea.input-invalid:focus {
+  border-color: var(--seed-stroke-critical-solid);
+  box-shadow: inset 0 0 0 1px var(--seed-stroke-critical-solid);
+}
+
+.field-error {
+  margin: 0;
+  font-size: var(--seed-font-size-t3);
+  line-height: var(--seed-line-height-t3);
+  font-weight: var(--seed-font-weight-regular);
+  color: var(--seed-fg-critical);
+}
+
+/* 1. 상품 이미지 업로드 & 프리셋 영역 (SEED Attachment Input & Chip Group) */
+.image-upload-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: var(--seed-dimension-x4);
+  align-items: stretch;
+}
+
+.image-preview-box {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--seed-radius-r3);
+  border: 1px dashed var(--seed-stroke-neutral-weak);
+  background-color: var(--seed-bg-neutral-muted);
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color var(--seed-duration-color-transition) var(--seed-timing-easing);
+}
+
+.image-preview-box:hover,
+.image-preview-box.drag-over {
+  border-color: var(--seed-stroke-neutral-solid);
+}
+
+.image-preview-box:focus-visible {
+  outline: 2px solid var(--seed-stroke-focus-ring);
+  outline-offset: 2px;
+}
+
+.image-preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.image-overlay-hint {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--seed-dimension-x1);
+  background: var(--seed-palette-static-black-alpha-700);
+  color: var(--seed-palette-static-white);
+  font-size: var(--seed-font-size-t3);
+  line-height: var(--seed-line-height-t3);
+  opacity: 0;
+  transition: opacity var(--seed-duration-color-transition) var(--seed-timing-easing);
+}
+
+.image-preview-box:hover .image-overlay-hint {
+  opacity: 1;
+}
+
+.camera-icon {
+  font-size: var(--seed-font-size-t8);
+}
+
+.btn-remove-image {
+  position: absolute;
+  top: var(--seed-dimension-x2);
+  right: var(--seed-dimension-x2);
+  z-index: 5;
+  padding: var(--seed-dimension-x1) var(--seed-dimension-x2_5);
+  border-radius: var(--seed-radius-r1_5);
+  border: none;
+  background-color: var(--seed-palette-static-black-alpha-700);
+  color: var(--seed-palette-static-white);
+  font-family: inherit;
+  font-size: var(--seed-font-size-t2);
+  font-weight: var(--seed-font-weight-medium);
+  cursor: pointer;
+}
+
+.preset-selector-panel {
+  background-color: var(--seed-bg-neutral-muted);
+  border-radius: var(--seed-radius-r3);
+  padding: var(--seed-dimension-x3_5);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--seed-dimension-x3);
+}
+
+.preset-panel-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--seed-dimension-x0_5);
+}
+
+.preset-title {
+  font-size: var(--seed-font-size-t4);
+  line-height: var(--seed-line-height-t4);
+  font-weight: var(--seed-font-weight-bold);
+  color: var(--seed-fg-neutral);
+}
+
+.preset-desc {
+  font-size: var(--seed-font-size-t2);
+  line-height: var(--seed-line-height-t2);
+  color: var(--seed-fg-neutral-subtle);
+}
+
+.preset-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--seed-spacing-x-between-chips);
+}
+
+/* SEED Chip (Outline Weak Variant) */
+.preset-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--seed-dimension-x1_5);
+  height: var(--seed-dimension-x9);
+  padding: 0 var(--seed-dimension-x2_5);
+  background-color: var(--seed-bg-layer-default);
+  border: 1px solid var(--seed-stroke-neutral-weak);
+  border-radius: var(--seed-radius-r2);
+  font-family: inherit;
+  font-size: var(--seed-font-size-t3);
+  line-height: var(--seed-line-height-t3);
+  font-weight: var(--seed-font-weight-medium);
+  color: var(--seed-fg-neutral-muted);
+  cursor: pointer;
+  transform-origin: center center;
+  transition: transform var(--seed-duration-pressed-scale) var(--seed-timing-pressed-scale);
+}
+
+.preset-chip:hover {
+  background-color: var(--seed-bg-layer-default-pressed);
+}
+
+.preset-chip:active {
+  transform: scale(var(--seed-scale-s95));
+}
+
+.preset-chip.active {
+  background-color: var(--seed-bg-neutral-solid);
+  border-color: var(--seed-bg-neutral-solid);
+  color: var(--seed-fg-on-neutral-solid);
+  font-weight: var(--seed-font-weight-bold);
+}
+
+/* 셀렉트 박스 및 가격 입력 (SEED Select Trigger & Text Input Prefix/Suffix Slot) */
+.select-wrapper {
+  position: relative;
+}
+
+.form-select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: var(--seed-dimension-x9);
+  cursor: pointer;
+}
+
+.select-arrow {
+  position: absolute;
+  right: var(--seed-dimension-x3_5);
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--seed-fg-neutral-subtle);
+}
+
+.price-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.currency-prefix {
+  position: absolute;
+  left: var(--seed-dimension-x3_5);
+  font-weight: var(--seed-font-weight-medium);
+  color: var(--seed-fg-neutral-subtle);
+  pointer-events: none;
+}
+
+.price-input {
+  padding-left: var(--seed-dimension-x8);
+  padding-right: var(--seed-dimension-x9);
+}
+
+.currency-suffix {
+  position: absolute;
+  right: var(--seed-dimension-x3_5);
+  font-size: var(--seed-font-size-t4);
+  font-weight: var(--seed-font-weight-regular);
+  color: var(--seed-fg-neutral-subtle);
+  pointer-events: none;
+}
+
+/* 자세한 설명 (SEED Textarea: 최소 높이 3줄 95px 이상 보장) */
+.form-textarea {
+  resize: vertical;
+  min-height: 108px;
+}
+
+/* 동네 빠른 선택 칩 (SEED Suggestion Chip) */
+.quick-location-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--seed-spacing-x-between-chips);
+  margin-top: var(--seed-dimension-x1);
+}
+
+.location-chip {
+  padding: var(--seed-dimension-x1) var(--seed-dimension-x2_5);
+  background-color: var(--seed-bg-neutral-weak);
+  color: var(--seed-fg-neutral-muted);
+  border: 1px solid transparent;
+  border-radius: var(--seed-radius-full);
+  font-family: inherit;
+  font-size: var(--seed-font-size-t2);
+  line-height: var(--seed-line-height-t2);
+  font-weight: var(--seed-font-weight-medium);
+  cursor: pointer;
+  transform-origin: center center;
+  transition:
+    background-color var(--seed-duration-color-transition) var(--seed-timing-easing),
+    transform var(--seed-duration-pressed-scale) var(--seed-timing-pressed-scale);
+}
+
+.location-chip:hover {
+  background-color: var(--seed-bg-neutral-weak-pressed);
+  color: var(--seed-fg-neutral);
+}
+
+.location-chip:active {
+  background-color: var(--seed-bg-neutral-weak-pressed);
+  transform: scale(var(--seed-scale-s95));
+}
+
+/* 판매 상태 선택 라디오 카드 (SEED Select Box Group)
+   Reference: https://seed-design.io/llms/components/select-box.txt */
+.status-radio-group {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--seed-dimension-x2);
+}
+
+.status-radio-card {
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+}
+
+.status-radio-card input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.status-card-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--seed-dimension-x1_5);
+  padding: var(--seed-dimension-x3) var(--seed-dimension-x2);
+  background-color: var(--seed-bg-layer-default);
+  border: 1px solid var(--seed-stroke-neutral-weak);
+  border-radius: var(--seed-radius-r2_5);
+  text-align: center;
+  transform-origin: center center;
+  transition:
+    background-color var(--seed-duration-color-transition) var(--seed-timing-easing),
+    border-color var(--seed-duration-color-transition) var(--seed-timing-easing),
+    transform var(--seed-duration-pressed-scale) var(--seed-timing-pressed-scale);
+}
+
+.status-radio-card:hover .status-card-inner {
+  background-color: var(--seed-bg-layer-default-pressed);
+}
+
+.status-radio-card:active .status-card-inner {
+  transform: scale(var(--seed-scale-s97));
+}
+
+.status-sub-text {
+  font-size: var(--seed-font-size-t2);
+  line-height: var(--seed-line-height-t2);
+  color: var(--seed-fg-neutral-subtle);
+  font-weight: var(--seed-font-weight-regular);
+}
+
+.status-card-sale input[type="radio"]:checked + .status-card-inner,
+.status-card-reserved input[type="radio"]:checked + .status-card-inner,
+.status-card-sold input[type="radio"]:checked + .status-card-inner {
+  background-color: var(--seed-bg-layer-default);
+  border-color: var(--seed-stroke-neutral-contrast);
+  box-shadow: inset 0 0 0 1px var(--seed-stroke-neutral-contrast);
+}
+
+.status-card-sale input[type="radio"]:checked + .status-card-inner .status-sub-text,
+.status-card-reserved input[type="radio"]:checked + .status-card-inner .status-sub-text,
+.status-card-sold input[type="radio"]:checked + .status-card-inner .status-sub-text {
+  color: var(--seed-fg-neutral);
+  font-weight: var(--seed-font-weight-medium);
+}
+
+.status-radio-card input[type="radio"]:focus-visible + .status-card-inner {
+  outline: 2px solid var(--seed-stroke-focus-ring);
+  outline-offset: 2px;
+}
+
+/* 맨 아래 [작성 완료] 버튼 (SEED Action Button Large CTA) */
+.write-footer {
+  margin-top: var(--seed-dimension-x1);
+  padding-top: var(--seed-dimension-x5);
+  border-top: 1px solid var(--seed-stroke-neutral-subtle);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-submit-write {
+  width: 100%;
+  height: var(--seed-dimension-x13);
+  font-size: var(--seed-font-size-t5);
+  line-height: var(--seed-line-height-t5);
+  border-radius: var(--seed-radius-r2_5);
+}
+
+/* ==========================================================================
+   공통 토스트 알림 (SEED Snackbar)
+   Reference: https://seed-design.io/llms/components/snackbar.txt
+   - Elevation Level 3 Transient Feedback ($color.bg.neutral-inverted, $shadow.s3)
+   ========================================================================== */
+.gamza-toast {
+  position: fixed;
+  bottom: max(var(--seed-dimension-x6), env(safe-area-inset-bottom, 24px));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  background-color: var(--seed-bg-neutral-inverted);
+  color: var(--seed-fg-neutral-inverted);
+  padding: var(--seed-dimension-x3) var(--seed-dimension-x4_5);
+  border-radius: var(--seed-radius-r2_5);
+  font-size: var(--seed-font-size-t4);
+  line-height: var(--seed-line-height-t4);
+  font-weight: var(--seed-font-weight-medium);
+  box-shadow: var(--seed-shadow-s3);
+  animation: seedSnackbarEnter var(--seed-duration-d4) var(--seed-timing-enter);
+  max-width: min(90vw, 420px);
+  text-align: start;
+}
+
+@keyframes seedSnackbarEnter {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 8px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+/* ==========================================================================
+   Forced Colors Mode (Windows 고대비 모드 접근성 지원)
+   ========================================================================== */
+@media (forced-colors: active) {
+  .btn,
+  .category-btn,
+  .product-card,
+  .detail-modal,
+  .status-badge,
+  .card-category-tag,
+  .detail-category-tag,
+  .gamza-toast,
+  .toggle-track,
+  .toggle-thumb {
+    border: 1px solid CanvasText;
+  }
+
+  .category-btn.active,
+  .preset-chip.active,
+  .btn-primary,
+  .available-toggle-btn[aria-pressed="true"] .toggle-track {
+    border: 2px solid Highlight;
+  }
+}
+
+/* ==========================================================================
+   SEED Breakpoints 반응형 미디어 쿼리
+   Reference: https://seed-design.io/llms/foundations/layout.txt
+   - md: 768px - 1279px (Gutters 32px/24px, Margins 24px)
+   - sm / base: < 768px (Gutters 16px, Margins 16px, Dialog 90vw)
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--seed-dimension-x4);
+  }
+}
+
+@media (max-width: 767px) {
+  .container {
+    padding: 0 var(--seed-spacing-x-global-gutter);
+  }
+
+  .image-upload-layout,
+  .form-row-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .image-preview-box {
+    max-height: 220px;
+  }
+
+  .write-form {
+    padding: var(--seed-dimension-x5);
+  }
+
+  /* Dialog Responsive Behavior: md 미만(~767px)에서는 화면 너비의 90%로 표시 */
+  .detail-modal {
+    width: 90vw;
+    max-height: 80vh;
+  }
+
+  .detail-modal__container {
+    max-height: 80vh;
+  }
+}
+
+@media (max-width: 640px) {
+  .header-inner {
+    flex-wrap: wrap;
+    gap: var(--seed-dimension-x2_5);
+    padding-top: var(--seed-dimension-x3);
+    padding-bottom: var(--seed-dimension-x3);
+  }
+
+  .brand-logo {
+    order: 1;
+  }
+
+  .logo-subtitle {
+    display: none;
+  }
+
+  .header-actions {
+    order: 2;
+    gap: var(--seed-dimension-x2);
+  }
+
+  .header-actions .btn {
+    height: var(--seed-dimension-x9);
+    padding: 0 var(--seed-dimension-x3);
+    font-size: var(--seed-font-size-t3);
+  }
+
+  .search-wrapper {
+    order: 3;
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .search-input {
+    height: var(--seed-dimension-x9);
+    font-size: var(--seed-font-size-t4);
+  }
+
+  .hero-banner {
+    padding: var(--seed-dimension-x4) var(--seed-dimension-x5);
+    margin-bottom: var(--seed-dimension-x4);
+  }
+
+  .hero-illust {
+    display: none;
+  }
+
+  .hero-title {
+    font-size: var(--seed-font-size-t6);
+    line-height: var(--seed-line-height-t6);
+  }
+
+  .filter-top-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--seed-dimension-x2_5);
+  }
+
+  .category-list {
+    margin: 0 calc(var(--seed-spacing-x-global-gutter) * -1);
+    padding: 0 var(--seed-spacing-x-global-gutter) var(--seed-dimension-x1);
+  }
+
+  .filter-toggle-wrap {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+    gap: var(--seed-dimension-x4);
+  }
+
+  .detail-image-wrap {
+    height: 34vh;
+    min-height: 200px;
+    max-height: 260px;
+  }
+
+  .detail-content {
+    padding: var(--seed-dimension-x4);
+  }
+
+  .detail-actions {
+    padding: var(--seed-dimension-x3) var(--seed-dimension-x4);
+  }
+
+  .preset-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ==========================================================================
+   로그인 / 회원가입 모달 (#authModal) & 헤더 인증 버튼 & 카드 작성자 닉네임 스타일
+   ========================================================================== */
+[hidden] {
+  display: none !important;
+}
+
+.btn-user-nickname {
+  background-color: var(--seed-bg-brand-weak);
+  color: var(--seed-fg-brand-contrast);
+  border: 1px solid var(--seed-stroke-brand-weak);
+  font-weight: var(--seed-font-weight-bold);
+  cursor: default;
+}
+
+.btn-user-nickname:hover {
+  background-color: var(--seed-bg-brand-weak-pressed);
+}
+
+.btn-logout {
+  color: var(--seed-fg-neutral-muted);
+}
+
+/* 상품 목록 카드 내 글쓴이 닉네임 표시 */
+.card-seller-row {
+  display: flex;
+  align-items: center;
+  gap: var(--seed-dimension-x1_5);
+  margin-top: var(--seed-dimension-x1);
+  font-size: var(--seed-font-size-t2);
+  line-height: var(--seed-line-height-t2);
+  color: var(--seed-fg-neutral-muted);
+  font-weight: var(--seed-font-weight-medium);
+}
+
+.card-seller-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: var(--seed-radius-full);
+  background-color: var(--seed-bg-neutral-muted);
+  color: var(--seed-fg-neutral);
+  font-size: var(--seed-font-size-t2);
+  font-weight: var(--seed-font-weight-medium);
+}
+
+/* 로그인 / 회원가입 모달 (<dialog id="authModal">) */
+.auth-modal {
+  border: none;
+  padding: 0;
+  border-radius: var(--seed-radius-r5);
+  background: var(--seed-bg-layer-floating);
+  color: var(--seed-fg-neutral);
+  box-shadow: var(--seed-shadow-s3);
+  width: min(92vw, 440px);
+  max-height: 90vh;
+  margin: auto;
+  overflow: hidden;
+}
+
+.auth-modal::backdrop {
+  background: var(--seed-bg-overlay);
+  backdrop-filter: blur(4px);
+}
+
+.auth-modal__container {
+  position: relative;
+  padding: var(--seed-dimension-x6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--seed-dimension-x4);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.auth-close-btn {
+  position: absolute;
+  top: var(--seed-dimension-x4);
+  right: var(--seed-dimension-x4);
+}
+
+.auth-modal__header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--seed-dimension-x1_5);
+  padding-right: var(--seed-dimension-x8);
+}
+
+.auth-modal__title {
+  margin: 0;
+  font-size: var(--seed-font-size-t7);
+  line-height: var(--seed-line-height-t7);
+  font-weight: var(--seed-font-weight-bold);
+  color: var(--seed-fg-neutral);
+}
+
+.auth-modal__subtitle {
+  margin: 0;
+  font-size: var(--seed-font-size-t3);
+  line-height: var(--seed-line-height-t3);
+  color: var(--seed-fg-neutral-subtle);
+}
+
+.auth-write-notice {
+  display: flex;
+  align-items: center;
+  gap: var(--seed-dimension-x2);
+  padding: var(--seed-dimension-x2_5) var(--seed-dimension-x3);
+  border-radius: var(--seed-radius-r2_5);
+  background-color: var(--seed-bg-brand-weak);
+  border: 1px solid var(--seed-stroke-brand-weak);
+  color: var(--seed-fg-brand-contrast);
+  font-size: var(--seed-font-size-t3);
+  line-height: var(--seed-line-height-t3);
+  font-weight: var(--seed-font-weight-medium);
+}
+
+.auth-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--seed-dimension-x1);
+  background-color: var(--seed-bg-neutral-weak);
+  padding: var(--seed-dimension-x1);
+  border-radius: var(--seed-radius-r2_5);
+}
+
+.auth-tab {
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: var(--seed-dimension-x2) var(--seed-dimension-x3);
+  border-radius: var(--seed-radius-r2);
+  font-size: var(--seed-font-size-t4);
+  font-weight: var(--seed-font-weight-bold);
+  color: var(--seed-fg-neutral-subtle);
+  cursor: pointer;
+  transition: background-color var(--seed-duration-d3), color var(--seed-duration-d3);
+}
+
+.auth-tab.active {
+  background-color: var(--seed-bg-layer-default);
+  color: var(--seed-fg-neutral);
+  box-shadow: var(--seed-shadow-s1);
+}
+
+.auth-error-banner {
+  margin-bottom: 0;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--seed-dimension-x4);
+}
+
+.password-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input {
+  padding-right: 64px;
+}
+
+.btn-toggle-pw {
+  position: absolute;
+  right: var(--seed-dimension-x2_5);
+  height: 28px;
+  padding: 0 var(--seed-dimension-x2_5);
+  border-radius: var(--seed-radius-r1_5);
+  border: 1px solid var(--seed-stroke-neutral-weak);
+  background-color: var(--seed-bg-neutral-muted);
+  color: var(--seed-fg-neutral-muted);
+  font-size: var(--seed-font-size-t2);
+  font-weight: var(--seed-font-weight-medium);
+  cursor: pointer;
+}
+
+.btn-toggle-pw:hover {
+  background-color: var(--seed-bg-neutral-weak);
+  color: var(--seed-fg-neutral);
+}
+
+.btn-auth-submit {
+  width: 100%;
+  height: var(--seed-dimension-x12);
+  font-size: var(--seed-font-size-t5);
+  font-weight: var(--seed-font-weight-bold);
+  border-radius: var(--seed-radius-r2_5);
+  margin-top: var(--seed-dimension-x1);
+}
+
+/* ==========================================================================
+   거래 완료 카드 살짝 흐리게 표시 & 목록 카드 상태 배지 강화
+   ========================================================================== */
+.product-card[data-status="거래 완료"],
+.product-card.is-sold {
+  opacity: 0.58;
+  background-color: var(--seed-bg-neutral-muted);
+}
+
+.product-card[data-status="거래 완료"]:hover,
+.product-card.is-sold:hover {
+  opacity: 0.78;
+}
+
+.product-card[data-status="거래 완료"] .card-image,
+.product-card.is-sold .card-image {
+  filter: grayscale(48%) opacity(0.8);
+}
+
+.product-card[data-status="거래 완료"] .card-title,
+.product-card.is-sold .card-title,
+.product-card[data-status="거래 완료"] .card-price,
+.product-card.is-sold .card-price {
+  color: var(--seed-fg-neutral-muted);
+}
+
+.card-status-top-badge {
+  position: absolute;
+  top: var(--seed-dimension-x3);
+  right: var(--seed-dimension-x3);
+  z-index: 2;
+  box-shadow: var(--seed-shadow-s1);
+}
+
+/* ==========================================================================
+   상세 모달: 작성자 본인 전용 관리 패널 (#ownerControlBox)
+   - 판매 상태 선택 (판매중 / 예약중 / 거래 완료) & 수정 / 삭제 버튼
+   ========================================================================== */
+.owner-control-box {
+  margin-top: var(--seed-dimension-x2);
+  padding: var(--seed-dimension-x4);
+  border-radius: var(--seed-radius-r3);
+  border: 1px solid var(--seed-stroke-brand-weak);
+  background-color: var(--seed-bg-brand-weak);
+  display: flex;
+  flex-direction: column;
+  gap: var(--seed-dimension-x3_5);
+}
+
+.owner-control__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--seed-dimension-x2);
+}
+
+.owner-control__label {
+  font-size: var(--seed-font-size-t3);
+  line-height: var(--seed-line-height-t3);
+  font-weight: var(--seed-font-weight-bold);
+  color: var(--seed-fg-brand-contrast);
+}
+
+.owner-status-group {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--seed-dimension-x2);
+}
+
+.owner-status-btn {
+  appearance: none;
+  height: var(--seed-dimension-x9);
+  padding: 0 var(--seed-dimension-x2_5);
+  border-radius: var(--seed-radius-r2);
+  border: 1px solid var(--seed-stroke-neutral-weak);
+  background-color: var(--seed-bg-layer-default);
+  color: var(--seed-fg-neutral-muted);
+  font-family: inherit;
+  font-size: var(--seed-font-size-t3);
+  font-weight: var(--seed-font-weight-bold);
+  cursor: pointer;
+  transition:
+    background-color var(--seed-duration-d3),
+    border-color var(--seed-duration-d3),
+    color var(--seed-duration-d3),
+    transform var(--seed-duration-pressed-scale);
+}
+
+.owner-status-btn:hover {
+  background-color: var(--seed-bg-layer-default-pressed);
+}
+
+.owner-status-btn:active {
+  transform: scale(var(--seed-scale-s95));
+}
+
+.owner-status-btn[data-status-value="판매중"].active {
+  background-color: var(--seed-bg-positive-solid);
+  border-color: var(--seed-bg-positive-solid);
+  color: var(--seed-palette-static-white);
+}
+
+.owner-status-btn[data-status-value="예약중"].active {
+  background-color: var(--seed-bg-warning-solid);
+  border-color: var(--seed-stroke-warning-solid);
+  color: var(--seed-fg-warning-contrast);
+}
+
+.owner-status-btn[data-status-value="거래 완료"].active {
+  background-color: var(--seed-bg-neutral-solid);
+  border-color: var(--seed-bg-neutral-solid);
+  color: var(--seed-fg-on-neutral-solid);
+}
+
+.owner-control__actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--seed-dimension-x2);
+  padding-top: var(--seed-dimension-x2);
+  border-top: 1px solid var(--seed-stroke-brand-weak);
+}
+
+.owner-action-btn {
+  width: 100%;
+  height: var(--seed-dimension-x9);
+  font-size: var(--seed-font-size-t3);
+  font-weight: var(--seed-font-weight-bold);
+  background-color: var(--seed-bg-layer-default);
+}
+
+.owner-action-btn--delete {
+  color: var(--seed-fg-critical);
+  border-color: var(--seed-stroke-critical-weak);
+}
+
+.owner-action-btn--delete:hover {
+  background-color: var(--seed-bg-critical-weak);
+  border-color: var(--seed-stroke-critical-solid);
+}
+
+
